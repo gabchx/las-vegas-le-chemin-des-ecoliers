@@ -235,6 +235,8 @@ footer p{max-width:48em}
 .moff{color:var(--muted)}
 .themebtn{position:fixed;left:clamp(12px,3vw,28px);bottom:calc(env(safe-area-inset-bottom,0px) + 16px);z-index:20;display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 13px 0 11px;border:1px solid var(--rule);border-radius:19px;background:var(--surface);color:var(--ink);font-family:var(--display);font-weight:600;font-size:1rem;cursor:pointer;box-shadow:0 6px 24px rgba(20,24,40,.18)}
 .themebtn:hover{border-color:var(--accent)}
+.mapbtn{bottom:calc(env(safe-area-inset-bottom,0px) + 62px)}
+.mapbtn[hidden]{display:none}
 .themebtn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .themebtn svg .half{fill:currentColor;stroke:none}
 @media (max-width:520px){.themebtn span{display:none}.themebtn{padding:0 10px}}
@@ -971,6 +973,22 @@ tbtn.addEventListener("click", function(){
 applyTheme();
 document.body.appendChild(tbtn);
 
+/* back-to-map button, shown once the map is scrolled out of view */
+var mbtn = document.createElement("button");
+mbtn.type = "button"; mbtn.className = "themebtn mapbtn"; mbtn.hidden = true;
+mbtn.title = "Remonter à la carte"; mbtn.setAttribute("aria-label", "Remonter à la carte");
+mbtn.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 13V3.5M3.8 7.6 8 3.4l4.2 4.2"/></svg><span>Carte</span>';
+mbtn.addEventListener("click", function(){
+  var sec = document.querySelector(".mapsec"); if (!sec) return;
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  sec.scrollIntoView({ behavior:reduce ? "auto" : "smooth", block:"start" });
+});
+document.body.appendChild(mbtn);
+var mtick = 0;
+function checkMapBtn(){ mtick = 0; var sec = document.querySelector(".mapsec"); mbtn.hidden = !sec || sec.getBoundingClientRect().bottom > 0; }
+window.addEventListener("scroll", function(){ if (!mtick) mtick = requestAnimationFrame(checkMapBtn); }, { passive:true });
+window.addEventListener("resize", checkMapBtn);
+
 render();
 if (location.hash) { var t0 = document.getElementById(location.hash.slice(1)); if (t0) setTimeout(function(){ t0.scrollIntoView(); }, 50); }
 
@@ -994,6 +1012,6 @@ if (window.claude && window.claude.use) {
 }
 })();
 </script>
-<p id="page-version" style="text-align:center;font:13px var(--body);color:var(--muted);margin:24px 16px 32px">Version du 24/10/2026 à 19h45</p>
+<p id="page-version" style="text-align:center;font:13px var(--body);color:var(--muted);margin:24px 16px 32px">Version du 24/10/2026 à 19h58</p>
 </body>
 </html>
