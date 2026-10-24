@@ -840,14 +840,29 @@ root.addEventListener("focusout", function(e){
   if (!editing || !e.target.dataset || !/\.(sched\.\d+\.2|sleepAt)\.(n|a|ll|lab)$/.test(e.target.dataset.path || "")) return;
   collect(); MAP.refresh();
 });
+var MULTI = /(\.sched\.\d+\.1|^notes\.\d+|^avis\.\d+|^contract\.\d+|^footer\.\d+|\.nerd\.\d+|\.alt|\.sleep|^lede|^todo\.\d+\.1|\.music\.\d+\.2|^prepSub|^daysSub|\.drive)$/;
+function isMulti(el){ var f = el && el.closest && el.closest("[data-path]"); return !!(f && MULTI.test(f.dataset.path)); }
+function insertBR(){
+  var sel = window.getSelection(); if (!sel || !sel.rangeCount) return;
+  var r = sel.getRangeAt(0); r.deleteContents();
+  var br = document.createElement("br"); r.insertNode(br);
+  var nx = br.nextSibling;
+  while (nx && nx.nodeType === 3 && nx.nodeValue === "") nx = nx.nextSibling;
+  if (!nx) br.parentNode.insertBefore(document.createElement("br"), br.nextSibling);
+  r = document.createRange(); r.setStartAfter(br); r.collapse(true);
+  sel.removeAllRanges(); sel.addRange(r);
+}
 root.addEventListener("keydown", function(e){
-  if (editing && e.key === "Enter" && e.target.isContentEditable) e.preventDefault();
+  if (!editing || e.key !== "Enter" || !e.target.isContentEditable) return;
+  e.preventDefault();
+  if (isMulti(e.target)) insertBR();
 });
 root.addEventListener("paste", function(e){
   if (!editing || !e.target.closest("[contenteditable]")) return;
   e.preventDefault();
-  var t = (e.clipboardData || window.clipboardData).getData("text/plain").replace(/\s*\n\s*/g, " ");
-  document.execCommand("insertText", false, t);
+  var raw = (e.clipboardData || window.clipboardData).getData("text/plain");
+  if (!isMulti(e.target)) { document.execCommand("insertText", false, raw.replace(/\s*\n\s*/g, " ")); return; }
+  raw.replace(/\r/g, "").split("\n").forEach(function(line, i){ if (i) insertBR(); if (line) document.execCommand("insertText", false, line); });
 });
 
 function buildDoc(){
@@ -873,7 +888,7 @@ function renderBar(){
   } else if (!editing) {
     bar.innerHTML = (msg ? '<span class="msg">' + msg + "</span>" : "") + '<button type="button" class="primary" data-act="edit">✎ Modifier la page</button>' + (canExport() ? '<button type="button" data-act="export" title="Télécharger la page avec vos modifications enregistrées">' + EXP_ICON + "Exporter</button>" : "");
   } else {
-    bar.innerHTML = '<span class="msg">' + (msg || "Cliquez sur un texte pour le modifier. Ctrl+B pour le gras.") + '</span><button type="button" class="primary" data-act="save"' + (saving ? " disabled" : "") + ">" + (saving ? "Enregistrement…" : "Enregistrer") + '</button><button type="button" data-act="cancel"' + (saving ? " disabled" : "") + ">Annuler</button>";
+    bar.innerHTML = '<span class="msg">' + (msg || "Cliquez sur un texte pour le modifier. Entrée pour aller à la ligne, Ctrl+B pour le gras.") + '</span><button type="button" class="primary" data-act="save"' + (saving ? " disabled" : "") + ">" + (saving ? "Enregistrement…" : "Enregistrer") + '</button><button type="button" data-act="cancel"' + (saving ? " disabled" : "") + ">Annuler</button>";
   }
 }
 bar.addEventListener("click", function(e){
@@ -1012,6 +1027,6 @@ if (window.claude && window.claude.use) {
 }
 })();
 </script>
-<p id="page-version" style="text-align:center;font:13px var(--body);color:var(--muted);margin:24px 16px 32px">Version du 24/10/2026 à 19h58</p>
+<p id="page-version" style="text-align:center;font:13px var(--body);color:var(--muted);margin:24px 16px 32px">Version du 24/10/2026 à 20h10</p>
 </body>
 </html>

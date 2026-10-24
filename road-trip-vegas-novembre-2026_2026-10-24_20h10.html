@@ -1,0 +1,1031 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<title>Vegas, par le chemin des écoliers : Du 3 au 14 novembre 2026, en van</title>
+<style id="css">
+:root{
+  --bg:#E4E8E3; --surface:#F2F4F0; --ink:#1E2430; --muted:#566070; --rule:#C3CAC2;
+  --accent:#1F6A72; --warn:#9A3F1C; --warnbg:#F3E2D6; --nerd:#E3E9EE;
+  --mapbg:#EEF0EA; --water:#3F7FA6; --grat:rgba(30,36,48,.07); --road:#FFFFFF; --roadcase:#C3BEB1; --park:rgba(92,140,86,.13); --parkline:#4F8049; --relief:#A8977A;
+  --display:"Barlow Condensed","Arial Narrow","Roboto Condensed",sans-serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#10152A; --surface:#181F38; --ink:#E8E5DB; --muted:#A2A9BB; --rule:#2B3453;
+    --accent:#72C6CC; --warn:#F2A27A; --warnbg:#2E2230; --nerd:#1C2744; --mapbg:#141B33; --water:#6FB4D8; --grat:rgba(232,229,219,.07); --road:#56607E; --roadcase:#232B47; --park:rgba(120,180,110,.11); --parkline:#86BE7C; --relief:#5A6690; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10152A; --surface:#181F38; --ink:#E8E5DB; --muted:#A2A9BB; --rule:#2B3453;
+  --accent:#72C6CC; --warn:#F2A27A; --warnbg:#2E2230; --nerd:#1C2744; --mapbg:#141B33; --water:#6FB4D8; --grat:rgba(232,229,219,.07); --road:#56607E; --roadcase:#232B47; --park:rgba(120,180,110,.11); --parkline:#86BE7C; --relief:#5A6690; color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 96px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+img,svg{max-width:100%}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(20px,4vw,56px);align-items:center;padding:clamp(28px,6vw,72px) 0 clamp(20px,3vw,32px)}
+.hero h1{font-family:var(--display);font-weight:700;font-size:clamp(3rem,9vw,6.6rem);line-height:.88;letter-spacing:-.01em;margin:0 0 .3em}
+.hero h1 .h1main{display:block}
+.hero h1 .h1sub{display:block;font-weight:500;color:var(--muted);font-size:.42em;line-height:1.1;margin-top:.35em;letter-spacing:0}
+.lede{font-size:1.15rem;max-width:34em;margin:0 0 1rem}
+.facts{display:flex;flex-wrap:wrap;gap:8px 22px;margin:0;padding:0;list-style:none;font-family:var(--display);font-size:1.2rem;font-weight:600}
+.facts li span{font-weight:500;color:var(--muted)}
+.map{background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:8px}
+.map svg{display:block;width:100%;height:auto}
+.map text{font-family:var(--display);fill:var(--ink)}
+.map .st{stroke:var(--rule);stroke-width:1.2;fill:none;stroke-dasharray:4 4}
+.map .stl{fill:var(--muted);font-size:15px;font-weight:500}
+.map .route{stroke:var(--ink);stroke-width:2.4;fill:none;stroke-linejoin:round;stroke-linecap:round}
+.map .stop{cursor:pointer}
+.map .stop circle{stroke:var(--surface);stroke-width:2}
+.map .lab{font-size:17px;font-weight:600}
+.map .lab tspan.d{fill:var(--muted);font-weight:500}
+
+/* strata nav */
+.strata{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--rule)}
+.strata ol{display:flex;margin:0 auto;padding:8px clamp(16px,4vw,40px);list-style:none;gap:4px;overflow-x:auto;max-width:1160px;scrollbar-width:thin}
+.strata a{display:block;min-width:76px;text-decoration:none;color:var(--ink);font-family:var(--display);line-height:1.1;padding:8px 6px 6px;border-top:10px solid var(--c);border-radius:2px 2px 0 0}
+.strata a b{display:block;font-size:1.05rem}
+.strata a small{display:block;font-size:.85rem;color:var(--muted);white-space:nowrap}
+.strata a[aria-current="true"]{background:var(--surface)}
+
+/* prep */
+h2.sec{font-family:var(--display);font-weight:700;font-size:clamp(2rem,4.5vw,3rem);line-height:1;margin:56px 0 8px}
+.sub{color:var(--muted);margin:0 0 20px;max-width:46em}
+.prep{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,3vw,40px)}
+.panel{background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:20px 22px}
+.panel h3{font-family:var(--display);font-size:1.5rem;margin:0 0 10px;font-weight:600}
+.check{list-style:none;margin:0;padding:0}
+.check li{border-top:1px solid var(--rule);padding:10px 0}
+.check li:first-child{border-top:0}
+.check label{display:grid;grid-template-columns:22px 1fr;gap:10px;cursor:pointer}
+.check input{width:18px;height:18px;margin:4px 0 0;accent-color:var(--accent)}
+.check .when{display:block;font-family:var(--display);font-weight:600;font-size:1rem;color:var(--warn)}
+.check input:checked + span{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1px}
+.notes p{margin:0 0 .8em}
+.notes b{font-family:var(--display);font-size:1.1rem;font-weight:600}
+.weather{width:100%;border-collapse:collapse;font-size:.95rem;margin-top:6px}
+.weather th,.weather td{text-align:left;padding:5px 6px;border-top:1px solid var(--rule);font-variant-numeric:tabular-nums}
+.weather th{font-family:var(--display);font-weight:600;font-size:1rem}
+.scroll{overflow-x:auto}
+
+/* days */
+.day{display:grid;grid-template-columns:120px minmax(0,1fr);gap:clamp(16px,3vw,36px);padding:44px 0;border-top:1px solid var(--rule)}
+.day:first-of-type{border-top:0}
+.core{position:relative;display:flex;flex-direction:column;align-items:flex-start}
+.core .num{font-family:var(--display);font-weight:700;font-size:4.2rem;line-height:.85}
+.core .date{font-family:var(--display);font-weight:600;font-size:1.15rem;margin:6px 0 12px}
+.core .sample{width:46px;flex:1;min-height:180px;background:var(--c);border-radius:23px 23px 4px 4px;position:relative;background-image:repeating-linear-gradient(176deg,transparent 0 13px,rgba(255,255,255,.18) 13px 15px,transparent 15px 31px,rgba(0,0,0,.08) 31px 33px)}
+.core .rock{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--display);font-size:.95rem;color:var(--muted);margin-top:10px;max-height:260px}
+.day h3{font-family:var(--display);font-weight:700;font-size:clamp(1.9rem,4vw,2.6rem);line-height:1;margin:0 0 6px}
+.drive{font-family:var(--display);font-size:1.15rem;font-weight:500;margin:0 0 14px;color:var(--muted)}
+.drive b{color:var(--ink);font-weight:600}
+.sky{display:flex;flex-wrap:wrap;gap:6px 20px;margin:0 0 18px;padding:0;list-style:none;font-family:var(--display);font-size:1.05rem}
+.sky li .lab{color:var(--muted)}
+.cols{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(18px,3vw,34px)}
+.sched{list-style:none;margin:0;padding:0}
+.sched li{display:grid;grid-template-columns:62px 1fr;gap:12px;padding:7px 0;border-top:1px solid var(--rule)}
+.sched li:first-child{border-top:0}
+.sched time{font-family:var(--display);font-weight:600;font-variant-numeric:tabular-nums;font-size:1.1rem}
+.hikes{width:100%;border-collapse:collapse;margin:0 0 16px;font-size:.95rem}
+.hikes caption{text-align:left;font-family:var(--display);font-weight:600;font-size:1.2rem;padding-bottom:4px}
+.hikes td{padding:6px 6px 6px 0;border-top:1px solid var(--rule);vertical-align:top}
+.hikes td.n{font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--muted)}
+.nerd{background:var(--nerd);border-radius:4px;padding:14px 16px;margin:0 0 14px}
+.nerd h4,.alt h4{font-family:var(--display);font-weight:600;font-size:1.2rem;margin:0 0 6px}
+.nerd ul{margin:0;padding-left:1.1em}
+.nerd li{margin:0 0 .45em}
+.alt{border-left:3px solid var(--warn);padding:2px 0 2px 14px;margin:0 0 12px}
+.alt p{margin:0}
+.sleep{font-size:.98rem;margin:0}
+.sleep b{font-family:var(--display);font-size:1.1rem;font-weight:600}
+footer{border-top:1px solid var(--rule);margin-top:40px;padding:28px 0 110px;color:var(--muted);font-size:.95rem}
+footer p{max-width:48em}
+
+@media (max-width:860px){
+  .hero,.prep,.cols{grid-template-columns:minmax(0,1fr)}
+  .day{grid-template-columns:minmax(0,1fr)}
+  .core{flex-direction:row;align-items:center;gap:14px}
+  .core .date{margin:0}
+  .core .sample{flex:none;width:100%;max-width:none;min-height:14px;height:14px;border-radius:7px;order:3;flex-basis:100%}
+  .core{flex-wrap:wrap}
+  .core .rock{writing-mode:horizontal-tb;transform:none;margin:0}
+}
+@media (prefers-reduced-motion:no-preference){
+  html{scroll-behavior:smooth}
+}
+
+.avis{max-width:46em}
+.editbar{position:fixed;right:clamp(12px,3vw,28px);bottom:calc(env(safe-area-inset-bottom,0px) + 16px);z-index:20;display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:8px;max-width:calc(100vw - 24px);background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:8px 10px;box-shadow:0 6px 24px rgba(20,24,40,.22);font-family:var(--display);font-size:1rem}
+.editbar[hidden]{display:none}
+.editbar .msg{color:var(--muted);max-width:26em;line-height:1.2}
+.editbar button,.add{font-family:var(--display);font-weight:600;font-size:1rem;border-radius:4px;padding:6px 12px;cursor:pointer;border:1px solid var(--accent);background:transparent;color:var(--accent)}
+.editbar button.primary{background:var(--accent);color:var(--surface)}
+.editbar button:disabled{opacity:.6;cursor:default}
+.add{display:inline-block;margin:8px 0 4px;font-size:.95rem;padding:3px 10px;border-style:dashed}
+.del{border:0;background:transparent;color:var(--warn);font-size:1.25rem;line-height:1;cursor:pointer;padding:0 4px;vertical-align:baseline}
+.editing [contenteditable]{outline:1px dashed var(--muted);outline-offset:2px;border-radius:2px;cursor:text}
+.editing [contenteditable]:focus{outline:2px solid var(--accent)}
+.editing [contenteditable]:empty::before{content:"…";color:var(--muted)}
+.editing .sched li{grid-template-columns:62px 1fr 24px}
+.editing p.row,.check li.row{display:grid;grid-template-columns:minmax(0,1fr) 24px;gap:8px;align-items:start}
+.check li.row .txt{display:block}
+.editing .core .rock{writing-mode:horizontal-tb;transform:none;max-height:none}
+
+.hero{grid-template-columns:minmax(0,1fr)!important;padding-bottom:12px!important}
+.mapsec{margin:8px auto 28px}
+.chips{display:flex;gap:0;margin-bottom:10px;border:1px solid var(--rule);border-radius:6px;overflow-x:auto;background:var(--surface);scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.mchip{flex:1 0 auto;min-width:54px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:8px 8px 7px;border:0;border-right:1px solid var(--rule);background:transparent;color:var(--muted);font-family:var(--display);cursor:pointer;position:relative;transition:background-color .15s,color .15s}
+.mchip:last-child{border-right:0}
+.mchip::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--c,var(--ink))}
+.mchip b{font-size:1.15rem;font-weight:700;line-height:1;color:var(--ink)}
+.mchip small{font-size:.8rem;line-height:1.1;white-space:nowrap}
+.mchip:hover{background:var(--bg)}
+.mchip[aria-pressed="true"]{background:var(--bg);color:var(--ink)}
+.mchip[aria-pressed="true"]::before{height:7px}
+.mchip[aria-pressed="true"]::after{content:"";position:absolute;left:10px;right:10px;bottom:0;height:2px;background:var(--ink)}
+.mchip:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.zoom{position:absolute;top:10px;right:10px;display:flex;flex-direction:column;border:1px solid var(--rule);border-radius:6px;overflow:hidden;background:var(--surface);box-shadow:0 2px 8px rgba(20,24,40,.12)}
+.zoom button{width:36px;height:36px;display:grid;place-items:center;border:0;border-bottom:1px solid var(--rule);background:transparent;color:var(--ink);cursor:pointer;padding:0}
+.zoom button:last-child{border-bottom:0}
+.zoom button:hover{background:var(--bg)}
+.zoom svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.mapframe{position:relative;border:1px solid var(--rule);border-radius:6px;overflow:hidden;background:var(--mapbg);aspect-ratio:720/440;touch-action:none;cursor:grab}
+.mapframe:active{cursor:grabbing}
+.mapframe > #map{display:block;width:100%;height:100%}
+#map text{font-family:var(--display)}
+#map .mbg{fill:var(--mapbg)}
+#map .grat{stroke:var(--grat);stroke-width:1;vector-effect:non-scaling-stroke}
+#map .gl{fill:var(--muted);opacity:.7}
+#map .st{stroke:var(--muted);stroke-width:1.2;stroke-dasharray:5 4;fill:none;vector-effect:non-scaling-stroke;opacity:.6}
+#map .stn{fill:var(--muted);font-weight:600;letter-spacing:.06em;opacity:.55}
+#map .river{fill:none;stroke:var(--water);stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke;opacity:.8}
+#map .lake{fill:none;stroke:var(--water);stroke-width:6;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke;opacity:.55}
+#map .rl{fill:var(--water);font-style:italic;font-family:var(--body)!important;opacity:.95}
+#map .rcase{fill:none;stroke:var(--mapbg);stroke-width:7;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke}
+#map .rline{fill:none;stroke-width:3.4;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke}
+#map .dim{opacity:.18}
+#map .mstop,#map .mlab{cursor:pointer}
+#map .mstop .hit{fill:transparent}
+#map .msym{stroke-width:1.8;vector-effect:non-scaling-stroke}
+#map .camp{fill:#2F6B3A;stroke:var(--mapbg);stroke-width:1.2}
+#map .camp.paid{fill:#8A5A12}
+#map .mstop.on .msym{stroke:var(--ink);stroke-width:3}
+#map .mstop:focus{outline:none}
+#map .mstop:focus-visible .msym{stroke:var(--accent);stroke-width:3}
+#map .mlab{fill:var(--ink);font-weight:600;stroke:var(--mapbg);paint-order:stroke;stroke-linejoin:round}
+#map .mlab.hub{font-weight:700}
+.mapbelow{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:12px 28px;margin-top:12px}
+.mapinfo{display:grid;gap:12px}
+.mcard,.mday{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:14px 16px}
+.mcard{border-left:4px solid var(--accent)}
+.mapinfo h3{font-family:var(--display);font-size:1.5rem;line-height:1.05;margin:0 0 6px}
+.mapinfo p{margin:0 0 8px}
+.mk{color:var(--muted);font-family:var(--display);font-size:.98rem}
+.mlist{margin:6px 0 12px;padding-left:1.4em;columns:2 15em;column-gap:24px}
+.mlist li{break-inside:avoid;margin:0 0 4px}
+.mlink{font:inherit;color:var(--accent);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:2px;text-align:left}
+.gbtn{display:inline-flex;align-items:center;gap:6px;font-family:var(--display);font-weight:600;font-size:1.02rem;padding:6px 12px 6px 10px;border-radius:6px;border:1px solid var(--rule);background:var(--bg);color:var(--ink);text-decoration:none;margin:4px 6px 2px 0;transition:border-color .15s}
+.gbtn:hover{border-color:var(--accent)}
+.gbtn .pin{width:15px;height:15px;flex:none}
+.gbtn .pin path{fill:#D9473B}
+.gbtn .pin circle{fill:#fff}
+.legend{list-style:none;margin:0;padding:0;font-family:var(--display);font-size:1.02rem;display:grid;gap:4px;align-content:start}
+.legend li{display:flex;align-items:center;gap:8px}
+.legend svg{width:16px;height:16px}
+.lg-rando{fill:var(--ink)}.lg-vue{fill:var(--surface);stroke:var(--ink);stroke-width:2}.lg-camp{fill:#2F6B3A}.lg-paid{fill:#8A5A12}
+.mnote{color:var(--muted);font-size:.9rem;margin:8px 0 0;grid-column:2}
+@media (max-width:860px){.mapframe{aspect-ratio:1/1}.mapbelow{grid-template-columns:minmax(0,1fr)}.mnote{grid-column:auto}}
+
+.sched .sc{min-width:0}
+.place{display:flex;flex-wrap:wrap;align-items:center;gap:2px 12px;margin-top:3px;font-family:var(--display);font-size:1rem;line-height:1.3}
+.plshow{display:inline-flex;align-items:center;gap:5px;border:0;background:none;padding:0;color:var(--accent);font:inherit;font-weight:600;cursor:pointer;text-align:left}
+.plshow:hover{text-decoration:underline;text-underline-offset:2px}
+.plname{display:inline-flex;align-items:center;gap:5px;color:var(--muted);font-weight:600}
+.place .pin{width:13px;height:13px;flex:none}
+.pin path{fill:#D9473B}.pin circle{fill:#fff}
+.plg{color:var(--muted);font-size:.92rem;text-underline-offset:2px}
+.sleepbox{margin:0}
+.sleepbox .place{margin-top:2px}
+.pled{display:grid;grid-template-columns:auto minmax(0,1fr);gap:5px 10px;margin:7px 0 3px;padding:9px 11px;border:1px dashed var(--muted);border-radius:6px;font-size:.95rem;background:var(--surface);align-items:start}
+.pll{font-family:var(--display);color:var(--muted);font-size:.92rem;padding-top:1px}
+.pllv{min-width:0}
+.plbad{display:block;color:var(--warn);font-size:.85rem;font-style:normal;margin-top:2px}
+.plhint{display:block;color:var(--muted);font-size:.82rem;font-style:normal;margin-top:2px}
+.kindbtn,.rmpl{font-family:var(--display);font-weight:600;font-size:.92rem;border:1px solid var(--rule);background:var(--bg);color:var(--ink);border-radius:4px;padding:2px 9px;cursor:pointer}
+.rmpl{color:var(--warn)}
+.addpl{display:block;margin:5px 0 0;font-size:.88rem;padding:1px 9px}
+.moff{color:var(--muted)}
+.themebtn{position:fixed;left:clamp(12px,3vw,28px);bottom:calc(env(safe-area-inset-bottom,0px) + 16px);z-index:20;display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 13px 0 11px;border:1px solid var(--rule);border-radius:19px;background:var(--surface);color:var(--ink);font-family:var(--display);font-weight:600;font-size:1rem;cursor:pointer;box-shadow:0 6px 24px rgba(20,24,40,.18)}
+.themebtn:hover{border-color:var(--accent)}
+.mapbtn{bottom:calc(env(safe-area-inset-bottom,0px) + 62px)}
+.mapbtn[hidden]{display:none}
+.themebtn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.themebtn svg .half{fill:currentColor;stroke:none}
+@media (max-width:520px){.themebtn span{display:none}.themebtn{padding:0 10px}}
+.gps{margin:0 0 8px;display:flex;align-items:baseline;gap:8px}
+.gpsv{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.95rem;font-variant-numeric:tabular-nums;user-select:all;padding:1px 6px;border:1px solid var(--rule);border-radius:4px;background:var(--bg)}
+.sky li.wx{margin-left:auto}
+.wxbtn{display:inline-flex;align-items:center;gap:6px;font-family:var(--display);font-weight:600;font-size:1rem;padding:3px 11px 3px 9px;border:1px solid var(--rule);border-radius:6px;background:var(--surface);color:var(--ink);text-decoration:none;transition:border-color .15s}
+.wxbtn:hover{border-color:var(--accent)}
+.wxbtn svg{width:16px;height:16px;fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linejoin:round}
+.editbar .ico{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:6px}
+
+#map .rlf0{stop-color:var(--relief);stop-opacity:.3}#map .rlf1{stop-color:var(--relief);stop-opacity:.12}#map .rlf2{stop-color:var(--relief);stop-opacity:0}
+#map .relief{fill:url(#rlfg)}
+#map .park{fill:var(--park);stroke:var(--parkline);stroke-opacity:.55;stroke-width:1;stroke-dasharray:3 3;vector-effect:non-scaling-stroke}
+#map .pklab{fill:var(--parkline);font-family:var(--body)!important;font-style:italic;font-weight:600;opacity:.85;pointer-events:none}
+#map .rdc,#map .rdf{fill:none;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke}
+#map .rdc{stroke:var(--roadcase)}
+#map .rdf{stroke:var(--road)}
+#map .rdc.rd-hist{stroke:#9A7240;opacity:.55}#map .rdf.rd-hist{stroke:var(--mapbg);stroke-dasharray:4 3}
+#map .town{fill:var(--muted)}
+#map .peak{fill:var(--muted);opacity:.8}
+#map .tlab{fill:var(--muted);font-weight:600;stroke:var(--mapbg);paint-order:stroke;stroke-linejoin:round;pointer-events:none}
+#map .plab{fill:var(--muted);font-family:var(--body)!important;font-style:italic;stroke:var(--mapbg);paint-order:stroke;stroke-linejoin:round;pointer-events:none}
+#map .shield{pointer-events:none}
+#map .shield text{font-weight:700}
+#map .sh-i rect{fill:#2D5DA8;stroke:#fff}#map .sh-i text{fill:#fff}
+#map .sh-us rect{fill:#fff;stroke:#2A2A2A}#map .sh-us text{fill:#1F1F1F}
+#map .sh-st rect{fill:var(--surface);stroke:var(--muted)}#map .sh-st text{fill:var(--ink)}
+#map .sh-hist rect{fill:#7A5A2E;stroke:#fff}#map .sh-hist text{fill:#fff}
+.lg-road{stroke:var(--roadcase);stroke-width:4;stroke-linecap:round}.lg-park{fill:var(--park);stroke:var(--parkline);stroke-dasharray:2 2}.lg-peak{fill:var(--muted)}
+
+.sky li.wx{display:flex;flex-wrap:wrap;gap:6px}
+.wxbtn svg .sig,.netlink svg .sig{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round}
+.netlink{position:absolute;top:10px;left:10px;display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px 0 10px;border:1px solid var(--rule);border-radius:6px;background:var(--surface);color:var(--ink);font-family:var(--display);font-weight:600;font-size:1rem;text-decoration:none;box-shadow:0 2px 8px rgba(20,24,40,.12)}
+.netlink svg{width:15px;height:15px}
+.netlink:hover{border-color:var(--accent)}
+
+.music{border:1px solid var(--rule);border-radius:6px;padding:12px 14px;margin:0 0 14px;background:var(--surface)}
+.music h4{display:flex;align-items:center;gap:7px;font-family:var(--display);font-weight:600;font-size:1.2rem;margin:0 0 6px}
+.music h4 svg{width:16px;height:16px;fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linejoin:round}
+.music ul{list-style:none;margin:0;padding:0}
+.music li{padding:6px 0;border-top:1px solid var(--rule)}
+.music li:first-child{border-top:0}
+.music .mt{font-family:var(--display);font-weight:600;font-size:1.08rem}
+.music .ma{color:var(--muted);font-family:var(--display);font-size:1.02rem}
+.music .mn{display:block;font-size:.93rem;color:var(--muted);line-height:1.4}
+.music .ml{display:flex;gap:12px;margin-top:2px;font-family:var(--display);font-size:.95rem}
+.music .ml a{color:var(--accent)}
+.editing .music .mt,.editing .music .ma{display:inline-block;min-width:3em}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<div id="editbar" class="editbar" hidden></div>
+<script id="trip-data" type="application/json">{"title":"Vegas, par le chemin des écoliers","subtitle":"Du 3 au 14 novembre 2026, en van","lede":"Valley of Fire, Zion, Bryce, les slot canyons d’Escalante, Capitol Reef, Arches, Canyonlands, Monument Valley, Page et le Grand Canyon, puis retour par la Route 66. Une rando qui vaut vraiment le détour par jour, des réveils vers 7 h, et 8 nuits sur 10 en bivouac gratuit dans la nature.","facts":[["~2 330 km","1 450 mi"],["~28 h","de volant"],["8 nuits sur 10","en bivouac"],["Nouvelle lune","le 9 nov."]],"prepTitle":"Avant le 3 novembre","prepSub":"Les cases cochées sont enregistrées dans ce navigateur uniquement. Tarifs et règles vérifiés auprès des sources officielles le 23 octobre 2026 ; revérifiez tout ce qui dépend des dates la semaine précédant le départ.","todoTitle":"À réserver ou vérifier","notesTitle":"Novembre, mode d’emploi","notes":["\u003cb>Lumière.\u003c/b> Lever vers 7 h 00, coucher vers 17 h 15 en Utah et en Arizona ; au Nevada, l’horloge affiche une heure de moins. Environ 10 h 30 de jour. Avec un réveil vers 7 h, le soleil se lève pendant le café ; le planning vise une arrivée au bivouac avant la nuit, et les rares arrivées de nuit se font sur des spots faciles à trouver.","\u003cb>Bivouac.\u003c/b> Sur les terres du BLM et des forêts nationales, c’est gratuit, sans réservation, limité à 14–16 jours. On s’installe sur un emplacement déjà utilisé (ou désigné, là où c’est indiqué), on remporte tout, y compris le papier toilette, et on respecte les interdictions de feu affichées. Ni eau ni toilettes. Le bivouac en véhicule est interdit dans les parcs nationaux et en terre navajo.","\u003cb>Fuseaux horaires.\u003c/b> Le Nevada est à UTC−8. L’Utah, l’Arizona et la Nation navajo sont tous à UTC−7 en novembre : votre téléphone arrête de changer d’avis une fois sorti du Nevada (en été, la Nation navajo et le reste de l’Arizona ont une heure d’écart).","\u003cb>Ciel noir.\u003c/b> La lune est un croissant décroissant au départ, nouvelle le 9 novembre, et un fin croissant du soir à la fin. Les soirées sont sans lune pendant tout le voyage, et les Taurides du Nord culminent vers les 11–12 novembre : peu de météores, mais connues pour leurs bolides lents et brillants.","\u003cb>Carburant et réseau.\u003c/b> Ne dépassez jamais une station avec moins d’un demi-réservoir sur l’UT-12, l’UT-24 ou l’US-163. Téléchargez des cartes hors ligne pour toute la région ; Escalante, Capitol Reef et Monument Valley sont presque entièrement en zone blanche.","\u003cb>Froid.\u003c/b> Moyennes typiques de novembre, pas des prévisions :"],"weather":{"head":["Lieu","Altitude","Jour","Nuit"],"rows":[["Las Vegas","610 m","~20 °C","~9 °C"],["Canyon de Zion","1 200 m","~16 °C","~3 °C"],["Moab","1 220 m","~14 °C","~0 °C"],["Bord du Grand Canyon","2 100 m","~10 °C","~−5 °C"],["Bord de Bryce","2 400 m","~8 °C","~−7 °C"]]},"todo":[["Maintenant","Hauteur 2,6 m et longueur 6 m, c’est bon pour Zion. Reste à mesurer la largeur d’un rétroviseur à l’autre au retrait du van (limite 2,39 m). C’est ce qui décide de l’itinéraire du jour 4."],["Maintenant","Pistes autorisées par le contrat. Gardez-les pour les jours secs, le van n’est pas un 4×4."],["Avant d’entrer dans Zion","Achetez le pass America the Beautiful non-résident (250 $, couvre le titulaire et trois adultes). Sans lui, chacun de vous paie 100 $ à Zion, à Bryce et au Grand Canyon en plus de l’entrée : 600 $ et plus à deux."],["Maintenant","Watchman Campground, Zion, nuits du 4 et du 5 novembre (Recreation.gov). C’est le seul camping payant du voyage."],["4 nov. avant 15 h 00 MT","Loterie de la veille pour Angels Landing le 5 novembre. Résultats à 16 h 00."],["Maintenant","Visite d’Antelope Canyon, 12 novembre, vers midi."],["À Moab","Toilettes portables ou wag bags, obligatoires dans les zones de bivouac désignées autour de Moab."],["Avant le 3 nov.","Bidons pour ~40 L d’eau : aucun point d’eau aux bivouacs. Remplissez à chaque ville."],["Avant le 3 nov.","Cartes hors ligne du sud de l’Utah et du nord de l’Arizona, plus une appli de bivouac hors ligne (iOverlander, Campendium) pour les spots de secours."],["Avant le 3 nov.","Duvets chauds (nuits jusqu’à −7 °C), microcrampons pour les sentiers verglacés, frontales avec piles neuves."],["Facultatif","Location de combinaisons étanches à Springdale si vous voulez remonter les Narrows le 5 novembre."]],"daysTitle":"Les journées","daysSub":"La bande à côté de chaque jour est une carotte géologique : la roche la plus ancienne que vous toucherez ce jour-là. Le voyage monte de dunes de 190 millions d’années jusqu’à des cheminées de fée de 50 millions d’années, puis finit 1,7 milliard d’années plus bas.","days":[{"n":1,"date":"Mardi 3 nov.","nd":"3 nov.","short":"Valley of Fire","c":"#B5452B","rock":"Grès Aztec, ~190 millions d’années","title":"Clés, courses, première nuit dans le désert","drive":"\u003cb>Las Vegas → Valley of Fire\u003c/b>, 90 km / 55 mi, ~1 h","sky":[["Coucher","16:40 PST"],["Lune","43 %, se lève après minuit"]],"sched":[["15:00","Récupération du van. Avant de signer, mesurez la hauteur, la largeur rétroviseurs compris et la longueur (voir jour 4), et demandez si les pistes non goudronnées sont autorisées : la plupart des bivouacs sont au bout d’une courte piste.",{"n":"Las Vegas","a":"Las Vegas, NV","ll":"36.1716, -115.1391","k":"etape","lab":"Las Vegas"}],["15:45","Une grosse course : eau pour plusieurs jours (aucun point d’eau aux bivouacs), petits-déjeuners, nourriture de rando, cartouche de gaz. Plein d’essence.",null],["16:40","Le soleil se couche pendant que vous êtes au supermarché. C’est comme ça.",null],["17:30","Route vers Valley of Fire. Le bivouac est au bord de la Valley of Fire Highway, ~6 km avant l’entrée ouest : pas besoin d’entrer dans le parc de nuit.",null],["Nuit","Andromède est haute dans le ciel en début de soirée. Dîner, dodo.",null]],"hikes":[],"nerd":["Le rouge, c’est le grès Aztec : une mer de sable jurassique, le même champ de dunes qui forme les falaises de grès Navajo de Zion demain. Ce sont des pellicules d’oxyde de fer sur les grains qui donnent la couleur.","Valley of Fire a été inaugurée en 1935, ce qui en fait le plus ancien parc d’État du Nevada."],"alt":"Si le terrain est plein ou ne vous plaît pas, Snowbird Mesa (Poverty Flats), entre le parc et Overton, est une autre zone gratuite.","sleep":"Bivouac BLM gratuit « Valley of Fire West », au bord de la Valley of Fire Highway (GPS 36.4445, −114.6756). D’autres voyageurs y sont arrivés de nuit et ont trouvé une place sans difficulté.","sleepAt":{"n":"Bivouac Valley of Fire West","a":"Valley of Fire Highway, Overton, NV","ll":"36.4445, -114.6756","k":"camp","lab":""},"music":[["Viva Las Vegas","Elvis Presley","Pour quitter le comptoir de location dans le bon esprit."],["Mr. Brightside","The Killers","Le groupe vient de Las Vegas."]]},{"n":2,"date":"Mercredi 4 nov.","nd":"4 nov.","short":"Zion","c":"#B5452B","rock":"Grès Aztec, ~190 millions d’années","title":"Fire Wave le matin, Zion l’après-midi","drive":"\u003cb>Valley of Fire → Springdale\u003c/b>, 265 km / 165 mi, ~2 h 45, plus une heure perdue au changement de fuseau","sky":[["Lever","06:03 PST, depuis le van"],["Coucher","17:32 MST, Zion"],["Lune","33 %"]],"sched":[["06:45","Le jour se lève sur le désert pendant le café.",null],["07:30","15 minutes jusqu’au Fire Wave, encore dans la lumière rasante : du grès en vagues, rayé comme un berlingot.",{"n":"Fire Wave","a":"Fire Wave Trailhead, Valley of Fire State Park","ll":"36.4848, -114.5279","k":"rando","lab":"Valley of Fire"}],["08:30","Boucle de White Domes.",{"n":"White Domes","a":"White Domes Trail, Valley of Fire State Park","ll":"36.487, -114.533","k":"rando","lab":""}],["09:30","Mouse’s Tank et ses pétroglyphes.",{"n":"Mouse’s Tank","a":"Mouse's Tank Trailhead, Valley of Fire State Park","ll":"36.45, -114.515","k":"rando","lab":""}],["10:30","Route vers Zion par Overton et l’I-15 (gorges de la Virgin River). Les horloges avancent d’une heure en entrant en Arizona.",null],["13:30","Avant 15 h 00 MT : inscrivez-vous sur Recreation.gov à la loterie de la veille pour Angels Landing le 5 novembre. Résultats à 16 h 00.",null],["14:30","Springdale. Centre des visiteurs, pass non-résident, installation au camping.",{"n":"Centre des visiteurs de Zion","a":"Zion Canyon Visitor Center","ll":"37.2002, -112.9866","k":"etape","lab":"Zion"}],["16:00","Pa’rus Trail le long de la rivière, à pied depuis le camping, jusqu’au coucher de soleil sur le Watchman depuis le pont de Canyon Junction.",{"n":"Canyon Junction","a":"Canyon Junction Bridge, Zion National Park","ll":"37.2136, -112.9762","k":"vue","lab":""}]],"hikes":[["Fire Wave","2,4 km / 1,5 mi","Sable plat et slickrock"],["Boucle de White Domes","1,8 km / 1,1 mi","Court passage en slot"],["Mouse’s Tank","1,3 km / 0,8 mi","Pétroglyphes tout du long"],["Pa’rus Trail","~5,6 km / 3,5 mi","Plat, goudronné"]],"nerd":["Atlatl Rock doit son nom au propulseur gravé dessus, une arme antérieure à l’arc dans la région.","En une heure sur l’I-15, vous traversez le Nevada, l’Arizona et l’Utah. En novembre, l’Arizona et l’Utah sont à la même heure ; en été, non."],"alt":"Pas de permis pour Angels Landing : plan B au jour 3.","sleep":"Exception : Watchman Campground (à réserver). Le BLM a décidé en mars 2026 d’interdire le bivouac sur ~14 000 acres autour de Zion (Hurricane Cliffs, Smithsonian Butte, Canaan Mountain) et les règles sont en transition : ne comptez pas sur du gratuit ici. Watchman est à pied de la navette, ce qui vous épargne la course au parking le matin.","sleepAt":{"n":"Watchman Campground","a":"Watchman Campground, Zion National Park","ll":"37.1983, -112.984","k":"campp","lab":""},"music":[["Paris, Texas","Ry Cooder","La guitare slide du désert, parfaite au lever sur le Fire Wave."],["Dreams","Fleetwood Mac","Pour l’I-15 et ses trois États en une heure."]]},{"n":3,"date":"Jeudi 5 nov.","nd":"5 nov.","short":"Zion","c":"#D58B5C","rock":"Grès Navajo, ~190 millions d’années","title":"Zion : une grande rando, pas deux","drive":"\u003cb>Pas de route.\u003c/b> Le canyon de Zion n’est accessible qu’en navette jusqu’à fin novembre.","sky":[["Lever","06:59"],["Coucher","17:31"],["Lune","23 %"]],"sched":[["07:30","Réveil, petit-déjeuner, navette vers 8 h 00 à pied depuis le camping.",null],["08:30","La rando du jour, plan A avec permis : Angels Landing depuis The Grotto. Walter’s Wiggles, Scout Lookout, puis les chaînes. Comptez 4 à 5 h.",{"n":"Angels Landing","a":"The Grotto Trailhead, Zion National Park","ll":"37.2593, -112.9512","k":"rando","lab":""}],["13:30","Pique-nique, puis navette jusqu’au Temple of Sinawava : Riverside Walk jusqu’à l’entrée des Narrows. Remonter la rivière demande une combinaison étanche en novembre ; c’est en option.",{"n":"Temple of Sinawava","a":"Temple of Sinawava, Zion National Park","ll":"37.2853, -112.9477","k":"rando","lab":""}],["16:30","Retour au camping avant la nuit. Pizza à Springdale.",null]],"hikes":[["Angels Landing","8,7 km / 5,4 mi","+454 m, permis, chaînes"],["Riverside Walk","3,5 km / 2,2 mi","Plat"],["Plan B : West Rim après Scout Lookout","Aussi loin que vous voulez","Sans permis"],["Option : The Narrows jusqu’à Wall Street","~12 km / 7,5 mi","Dans la rivière, eau à ~8–10 °C"]],"nerd":["Les falaises sont des dunes fossiles épaisses de ~600 m. Les lignes obliques à l’intérieur (stratifications entrecroisées) sont les flancs de dunes poussées par les vents du Jurassique.","Walter’s Wiggles, 21 lacets serrés, ont été construits en 1926 et portent le nom du premier superintendant de Zion, Walter Ruesch.","À Wall Street, les Narrows font environ 6 à 9 m de large pour des parois de ~300 m. Un orage loin en amont peut provoquer une crue par grand soleil : vérifiez le risque de crue éclair au centre des visiteurs avant d’entrer dans l’eau."],"alt":"Plan B (sans permis) : West Rim Trail jusqu’à Scout Lookout, puis continuez à monter sur le West Rim au lieu de prendre les chaînes. Vue différente, même effort, pas de foule.","sleep":"Watchman Campground, deuxième nuit.","sleepAt":{"n":"Watchman Campground","a":"Watchman Campground, Zion National Park","ll":"37.1983, -112.984","k":"campp","lab":""},"music":[["Holocene","Bon Iver","Pour la descente d’Angels Landing."],["Helplessness Blues","Fleet Foxes","Pour la navette du retour."]]},{"n":4,"date":"Vendredi 6 nov.","nd":"6 nov.","short":"Bryce","c":"#E09AA3","rock":"Formation Claron, ~50 millions d’années","title":"Tunnel, damier, cheminées de fée","drive":"\u003cb>Springdale → Bryce Canyon\u003c/b>, 137 km / 85 mi, ~1 h 50 par le tunnel, ou ~225 km / 140 mi et 2 h 50 via Kanab si le van est trop grand","sky":[["Lever","07:00"],["Coucher","17:26, Bryce Point"],["Lune","15 %, se lève vers 4 h"]],"sched":[["08:00","Départ de Zion vers l’est.",null],["08:30","Canyon Overlook Trail juste après le tunnel (si le van passe), dans la lumière du matin.",{"n":"Canyon Overlook","a":"Canyon Overlook Trail, Zion National Park","ll":"37.2133, -112.9411","k":"rando","lab":""}],["09:15","Arrêt à Checkerboard Mesa, le damier de grès.",{"n":"Checkerboard Mesa","a":"Checkerboard Mesa, Zion National Park","ll":"37.2263, -112.8822","k":"vue","lab":""}],["10:30","US-89 et UT-12 par les arches rocheuses de Red Canyon jusqu’à Bryce.",{"n":"Red Canyon","a":"Red Canyon Visitor Center, Utah","ll":"37.7432, -112.308","k":"vue","lab":""}],["11:30","La rando du jour : le huit Queen’s Garden, Peekaboo, Navajo, au milieu des cheminées de fée.",{"n":"Sunset Point","a":"Sunset Point, Bryce Canyon National Park","ll":"37.6229, -112.1663","k":"rando","lab":"Bryce"}],["15:30","Pause, puis la route panoramique jusqu’à Rainbow Point avec arrêts aux belvédères.",{"n":"Rainbow Point","a":"Rainbow Point, Bryce Canyon National Park","ll":"37.4757, -112.24","k":"vue","lab":""}],["16:45","Coucher de soleil à Bryce Point, puis 20 minutes jusqu’au bivouac.",{"n":"Bryce Point","a":"Bryce Point, Bryce Canyon National Park","ll":"37.604, -112.158","k":"vue","lab":""}],["Nuit","Ciel noir, la lune ne se lève que vers 4 h. Il gèlera franchement à ~2 300 m : tout le monde dans les duvets.",null]],"hikes":[["Canyon Overlook","1,6 km / 1 mi","+50 m"],["Le huit Queen’s Garden, Peekaboo, Navajo","~10,3 km / 6,4 mi","~+490 m"]],"nerd":["Bryce n’est pas un canyon. C’est une série d’amphithéâtres creusés dans les Pink Cliffs, la marche supérieure du Grand Staircase (le « grand escalier »). Dans une semaine, vous serez sur la marche du bas, au Grand Canyon.","Les cheminées de fée naissent de la cryoclastie : l’eau de fonte s’infiltre dans les fissures le jour et gonfle en gelant la nuit, et Bryce connaît ce cycle environ deux cents nuits par an. Novembre est la pleine saison.","Ebenezer Bryce, le colon mormon qui a donné son nom au parc, aurait dit que c’était « un sacré endroit pour perdre une vache ».","Le tunnel Zion–Mt Carmel (1930) fait 1,8 km ; les fenêtres que vous croisez ont été percées pour jeter les déblais directement dans le vide."],"alt":"Depuis le 7 juin 2026, les véhicules de plus de 3,4 m (11′4″) de haut, 2,4 m (7′10″) de large rétroviseurs compris, ou 7,8 m (25′9″) de long sont interdits sur toute la Zion–Mt Carmel Highway, sans possibilité d’escorte. Votre van passe en hauteur (2,6 m) et en longueur (6 m). Les 2,1 m annoncés sont la largeur de caisse, donc mesurez d’un rétroviseur à l’autre. Au-delà de 2,39 m, il faut faire le détour. Si c’est votre cas : oubliez Canyon Overlook et passez par Hurricane → UT-59 → Kanab → US-89 jusqu’à Bryce.","sleep":"Bivouac gratuit sur Tom’s Best Spring Road (FR 117, Dixie National Forest), qui part de l’UT-12 à ~10 km à l’ouest de Bryce (GPS 37.728, −112.2487). Pins ponderosa et prairies ; feux interdits d’après les panneaux sur place.","sleepAt":{"n":"Bivouac Tom’s Best Spring","a":"Tom's Best Spring Road (FR 117), Dixie National Forest","ll":"37.728, -112.2487","k":"camp","lab":""},"music":[["America","Simon &amp; Garfunkel","Pour l’US-89 et ses grands espaces."],["Your Hand in Mine","Explosions in the Sky","Pour le coucher de soleil à Bryce Point."]]},{"n":5,"date":"Samedi 7 nov.","nd":"7 nov.","short":"Escalante","c":"#D58B5C","rock":"Grès Navajo, ~190 millions d’années","title":"La Byway 12 et Calf Creek","drive":"\u003cb>Bryce → Escalante → Calf Creek\u003c/b>, ~105 km / 65 mi, ~1 h 30","sky":[["Lever","06:59"],["Coucher","17:23, le Hogsback"],["Lune","8 %"]],"sched":[["07:30","Réveil dans la forêt. Option : 15 minutes jusqu’à Sunrise Point pour la lumière du matin sur l’amphithéâtre.",{"n":"Sunrise Point","a":"Sunrise Point, Bryce Canyon National Park","ll":"37.6283, -112.1631","k":"vue","lab":""}],["09:00","UT-12 vers l’est, vues sur Powell Point. Café et essence à Escalante ; demandez l’état des pistes au centre des visiteurs.",{"n":"Escalante","a":"Escalante, UT","ll":"37.7702, -111.6024","k":"etape","lab":"Escalante"}],["11:00","La rando du jour : Lower Calf Creek Falls, un canyon sablonneux le long de greniers ancestraux et de pictogrammes à l’ocre rouge, jusqu’à une cascade de 38 m. Pique-nique au pied.",{"n":"Lower Calf Creek Falls","a":"Lower Calf Creek Falls Trailhead","ll":"37.7943, -111.4148","k":"rando","lab":""}],["15:00","Installation au bivouac de Spencer Flat, à quelques minutes.",null],["16:45","Le Hogsback au coucher du soleil, un peu plus à l’est : une route sur une crête, avec du vide des deux côtés.",{"n":"Le Hogsback","a":"Hogsback, Utah Scenic Byway 12","ll":"37.827, -111.402","k":"vue","lab":""}]],"hikes":[["Lower Calf Creek Falls","~10,5 km / 6,5 mi","Plutôt plat, sable mou"],["Option : slots Peekaboo et Spooky","5,6 km / 3,5 mi","Si la piste est praticable"]],"nerd":["L’Escalante a été la dernière rivière des 48 États contigus à être cartographiée, en 1872, par Almon Thompson de l’expédition de John Wesley Powell.","Hole-in-the-Rock Road suit l’expédition mormone de 1879–1880, qui a descendu ses chariots par une fissure dans la falaise pour franchir le Colorado.","Le plateau de Kaiparowits que vous traversez a livré une série de nouveaux dinosaures depuis la création du monument en 1996, dont des cératopsiens aux collerettes extravagantes."],"alt":"Les slots Peekaboo et Spooky sont au bout de 42 km de piste sur Hole-in-the-Rock Road, signalée boueuse et défoncée dans le bulletin du BLM du 16 octobre 2026. Si elle a séché et que la location l’autorise, faites-les le matin et gardez Calf Creek pour l’après-midi.","sleep":"Bivouac gratuit sur Spencer Flat Road, qui part de l’UT-12 vers le mile 70 (Grand Staircase–Escalante). Piste sèche et en bon état au dernier bulletin du BLM. Little Spencer Flat est le secteur le plus proche de la route (GPS 37.7231, −111.4381).","sleepAt":{"n":"Bivouac Spencer Flat","a":"Spencer Flat Road, Escalante, UT","ll":"37.7231, -111.4381","k":"camp","lab":""},"music":[["Big Black Car","Gregory Alan Isakov","Pour la Byway 12, en roulant doucement."],["Harvest Moon","Neil Young","Pour la soirée au bivouac."]]},{"n":6,"date":"Dimanche 8 nov.","nd":"8 nov.","short":"Capitol Reef","c":"#9B3E2A","rock":"Grès Wingate, ~200 millions d’années","title":"Boulder Mountain, Capitol Reef, et les gobelins","drive":"\u003cb>Spencer Flat → Capitol Reef → Goblin Valley\u003c/b>, ~230 km / 145 mi, ~2 h 45","sky":[["Lever","06:58"],["Coucher","~17:15, Goblin Valley"],["Lune","3 %"]],"sched":[["07:30","Café au van, puis l’UT-12 par Boulder et Boulder Mountain (~2 900 m ; attention au verglas). Arrêt au belvédère de Larb Hollow, face au Waterpocket Fold et aux Henry Mountains.",{"n":"Larb Hollow Overlook","a":"Larb Hollow Overlook, Highway 12","ll":"38.048, -111.356","k":"vue","lab":""}],["09:30","Capitol Reef. La rando du jour : Cassidy Arch par Grand Wash.",{"n":"Cassidy Arch","a":"Cassidy Arch Trail, Capitol Reef National Park","ll":"38.2715, -111.2255","k":"rando","lab":""}],["12:30","Pique-nique dans les vergers de Fruita, pétroglyphes sur l’UT-24, tartes de Gifford House si la boutique est encore ouverte.",{"n":"Fruita","a":"Gifford Homestead, Capitol Reef National Park","ll":"38.2818, -111.2475","k":"etape","lab":"Capitol Reef"}],["13:30","UT-24 vers l’est devant Factory Butte. Plein à Hanksville.",{"n":"Factory Butte","a":"Factory Butte, Utah","ll":"38.444, -110.895","k":"vue","lab":""}],["14:00","La Mars Desert Research Station est visible depuis la route (regardez de loin, l’équipage peut être en simulation).",{"n":"Mars Desert Research Station","a":"Mars Desert Research Station","ll":"38.4062, -110.7919","k":"vue","lab":""}],["15:00","Goblin Valley : balade libre parmi les gobelins jusqu’au coucher du soleil.",{"n":"Goblin Valley","a":"Goblin Valley State Park","ll":"38.565, -110.707","k":"rando","lab":"Goblin Valley"}],["17:30","Bivouac à quelques minutes, sous l’un des ciels les plus noirs du voyage.",null]],"hikes":[["Cassidy Arch","5,5 km / 3,4 mi","+204 m"],["Valley of Goblins","À volonté","Errance libre"],["Option : Little Wild Horse Canyon","~6,4 km / 4 mi","Slot sans technique"]],"nerd":["Les Henry Mountains ont été la dernière chaîne des 48 États contigus à être nommée et cartographiée. G. K. Gilbert les a étudiées dans les années 1870 et a inventé le mot laccolite pour ce qu’il y a trouvé : du magma qui a soulevé la roche au-dessus de lui au lieu d’entrer en éruption.","Le Waterpocket Fold est un pli de ~160 km dans la croûte terrestre, un monoclinal. Les premiers voyageurs l’ont appelé reef (récif) parce qu’il bloquait le passage comme un récif en mer ; les dômes blancs de grès Navajo au sommet rappelaient des capitoles.","Goblin Valley a servi de planète extraterrestre dans Galaxy Quest (1999)."],"alt":"En manque d’énergie : Hickman Bridge (2,9 km) au lieu de Cassidy Arch.","sleep":"Bivouac BLM gratuit sur Wild Horse Road, juste à l’extérieur de Goblin Valley State Park, dans le San Rafael Swell. Spot moins documenté que les autres. \u003cb>Plan B payant :\u003c/b> le camping de Goblin Valley State Park, ouvert toute l’année, avec douches (24 emplacements et deux yourtes) ; réservation conseillée.","sleepAt":{"n":"Bivouac Wild Horse Road","a":"Wild Horse Road, Goblin Valley, Utah","ll":"38.588, -110.755","k":"camp","lab":""},"music":[["Life on Mars?","David Bowie","En passant devant la Mars Desert Research Station."],["Rocket Man","Elton John","Goblin Valley a joué une planète extraterrestre dans Galaxy Quest."]]},{"n":7,"date":"Lundi 9 nov.","nd":"9 nov.","short":"Arches","c":"#CF6A34","rock":"Grès Entrada, ~165 millions d’années","title":"Arches, sous la nouvelle lune","drive":"\u003cb>Goblin Valley → Moab → Arches\u003c/b>, ~165 km / 100 mi, ~1 h 45, puis ~65 km dans le parc","sky":[["Lever","06:52"],["Coucher","17:11, Delicate Arch"],["Lune","Nouvelle"]],"sched":[["07:30","Réveil parmi les gobelins, route vers Moab par l’I-70 et l’US-191.",null],["09:30","En passant, jetez un œil à Willow Springs Road, à 15 minutes d’Arches : c’est le bivouac de ce soir.",null],["10:00","Arches (pas de créneau horaire à réserver en 2026) : Windows, Turret Arch et Double Arch.",{"n":"The Windows","a":"The Windows, Arches National Park","ll":"38.6869, -109.537","k":"rando","lab":"Arches"}],["11:30","La rando du jour : Devils Garden jusqu’à Landscape Arch et Double O Arch, aller-retour.",{"n":"Devils Garden","a":"Devils Garden Trailhead, Arches National Park","ll":"38.7829, -109.5949","k":"rando","lab":""}],["15:15","Balanced Rock.",{"n":"Balanced Rock","a":"Balanced Rock, Arches National Park","ll":"38.701, -109.5645","k":"vue","lab":""}],["15:30","Le sentier de Delicate Arch, calé pour le coucher du soleil. Descente à la frontale.",{"n":"Delicate Arch","a":"Delicate Arch Trailhead, Arches National Park","ll":"38.7357, -109.5205","k":"rando","lab":""}],["18:15","Bivouac à Willow Springs. La nuit la plus noire du voyage : guettez les bolides des Taurides.",null]],"hikes":[["Boucle des Windows","1,6 km / 1 mi","Facile"],["Devils Garden jusqu’à Double O","6,8 km / 4,2 mi","Lames de grès, un peu d’escalade"],["Delicate Arch","5,1 km / 3,2 mi","+146 m"]],"nerd":["Les arches existent grâce au sel. D’épais dépôts de sel du bassin de Paradox, sous le parc, ont flué, se sont bombés puis effondrés, fracturant le grès Entrada au-dessus en lames parallèles. L’érosion attaque les lames et des trous apparaissent.","Plus de 2 000 arches sont répertoriées ici ; pour compter, l’ouverture doit faire au moins 3 pieds (~1 m).","Landscape Arch a une portée de ~93 m et est plus fine qu’elle n’en a l’air. Une grosse plaque s’en est détachée en 1991, d’où la fermeture du sentier en dessous."],"alt":"Pour arriver au bivouac avant la nuit : faites Delicate Arch en fin de matinée et regardez le coucher depuis le van.","sleep":"Willow Springs Road, au nord de Moab : emplacements désignés gratuits uniquement (on s’installe sur un site signalé, pas ailleurs). Dans les zones désignées autour de Moab, toilettes portables ou sacs à déchets (wag bags) obligatoires : achetez-en en ville.","sleepAt":{"n":"Bivouac Willow Springs","a":"Willow Springs Road, Moab, UT","ll":"38.693, -109.693","k":"camp","lab":""},"music":[["Eclipse","Pink Floyd","Nuit de nouvelle lune : The Dark Side of the Moon, évidemment."],["Brain Damage","Pink Floyd","Le morceau qui précède Eclipse, à écouter dans l’ordre."]]},{"n":8,"date":"Mardi 10 nov.","nd":"10 nov.","short":"Canyonlands","c":"#CDBFA3","rock":"Grès White Rim, ~270 millions d’années","title":"Island in the Sky, sans réveil","drive":"\u003cb>Moab → Island in the Sky\u003c/b>, 50 km / 32 mi, ~40 min","sky":[["Lever","06:54"],["Coucher","17:12, Dead Horse Point"],["Lune","Nouvelle, rien dans le ciel"]],"sched":[["08:00","Café, puis route vers Canyonlands.",null],["08:45","Mesa Arch : la lumière du matin est encore belle sous l’arche, sans la foule du lever.",{"n":"Mesa Arch","a":"Mesa Arch, Canyonlands National Park","ll":"38.3893, -109.8681","k":"vue","lab":""}],["09:30","La rando du jour : Grand View Point Trail jusqu’au bout du plateau.",{"n":"Grand View Point","a":"Grand View Point Overlook, Canyonlands National Park","ll":"38.311, -109.857","k":"rando","lab":"Canyonlands"}],["11:30","Le premier belvédère d’Upheaval Dome.",{"n":"Upheaval Dome","a":"Upheaval Dome Trailhead, Canyonlands National Park","ll":"38.4277, -109.9265","k":"rando","lab":""}],["13:00","Pique-nique à Green River Overlook.",{"n":"Green River Overlook","a":"Green River Overlook, Canyonlands National Park","ll":"38.37, -109.889","k":"vue","lab":""}],["14:00","Shafer Canyon Overlook (les 4×4 qui rampent dans les lacets).",{"n":"Shafer Canyon Overlook","a":"Shafer Canyon Overlook, Canyonlands National Park","ll":"38.458, -109.809","k":"vue","lab":""}],["15:00","Option : Mill Canyon Dinosaur Trackway, au nord de l’embranchement, ou une sieste.",{"n":"Mill Canyon Dinosaur Trackway","a":"Mill Canyon Dinosaur Trackway, Moab, UT","ll":"","k":"vue","lab":""}],["16:30","Dead Horse Point State Park (droit d’entrée à part) pour le coucher sur le méandre du Colorado. Bivouac à quelques minutes.",{"n":"Dead Horse Point","a":"Dead Horse Point State Park","ll":"38.4706, -109.74","k":"vue","lab":""}]],"hikes":[["Mesa Arch","0,8 km / 0,5 mi","Facile"],["Grand View Point","3,2 km / 2 mi","Le long du rebord"],["Upheaval Dome, premier belvédère","~1,6 km / 1 mi","Court, un peu de montée"]],"nerd":["Upheaval Dome a fait débat pendant des décennies : bulle de sel remontée ou cratère d’impact érodé ? Du quartz choqué trouvé dans ses roches fait pencher la balance vers une météorite.","Les bassins bleu vif visibles depuis Dead Horse Point sont des bassins d’évaporation de potasse, teintés en bleu pour absorber plus de soleil et sécher plus vite.","La scène finale de Thelma et Louise a été tournée près de Dead Horse Point, pas au Grand Canyon."],"alt":"Envie d’une vraie grosse journée : la Syncline Loop d’Upheaval Dome (13,4 km, +457 m) remplace Grand View et la pause de l’après-midi.","sleep":"Emplacements désignés gratuits du BLM le long de l’UT-313 (secteur Gemini Bridges), sur la route de Dead Horse Point, ou retour à Willow Springs. Mêmes règles : site signalé, toilettes portables. Spots moins documentés que les autres. \u003cb>Plan B payant :\u003c/b> les campings de Dead Horse Point State Park (réservables), Horsethief Campground (BLM, sur l’UT-313) ou Willow Flat dans Canyonlands (12 emplacements, sans réservation, sans eau).","sleepAt":{"n":"Bivouac UT-313","a":"Gemini Bridges Road, Moab, UT","ll":"38.53, -109.73","k":"camp","lab":""},"music":[["Part of Me, Part of You","Glenn Frey","Le thème de Thelma et Louise, tourné près de Dead Horse Point."],["Better Not Look Down","B.B. King","Aussi dans la bande originale du film. Titre de circonstance au bord du plateau."]]},{"n":9,"date":"Mercredi 11 nov.","nd":"11 nov.","short":"Monument Valley","c":"#C0502F","rock":"Grès De Chelly, ~270 millions d’années","title":"Monument Valley, puis la Vallée des Dieux","drive":"\u003cb>Moab → Bluff → Monument Valley → Valley of the Gods\u003c/b>, ~380 km / 235 mi, ~4 h 30","sky":[["Lever","06:55"],["Coucher","17:15, Valley of the Gods"],["Lune","2 %"]],"sched":[["07:45","Départ de Moab. Wilson Arch au bord de la route.",{"n":"Wilson Arch","a":"Wilson Arch, Utah","ll":"38.2263, -109.3653","k":"vue","lab":""}],["09:45","Bluff : panneau de pétroglyphes de Sand Island au bord de la San Juan, café.",{"n":"Sand Island","a":"Sand Island Petroglyph Panel, Bluff, UT","ll":"37.261, -109.614","k":"vue","lab":""}],["11:00","Goosenecks State Park : la San Juan dans un méandre encaissé de 300 m.",{"n":"Goosenecks","a":"Goosenecks State Park, Utah","ll":"37.1747, -109.927","k":"vue","lab":""}],["11:45","Le rocher de Mexican Hat.",{"n":"Mexican Hat","a":"Mexican Hat Rock, Utah","ll":"37.166, -109.855","k":"vue","lab":""}],["12:00","Forrest Gump Point sur l’US-163.",{"n":"Forrest Gump Point","a":"Forrest Gump Point, US-163","ll":"37.1009, -109.9918","k":"vue","lab":""}],["12:30","Monument Valley Navajo Tribal Park (droit d’entrée tribal ; le pass national ne s’applique pas). La rando du jour : Wildcat Trail autour de West Mitten.",{"n":"Monument Valley","a":"Monument Valley Navajo Tribal Park Visitor Center","ll":"36.984, -110.112","k":"rando","lab":"Monument Valley"}],["15:00","Retour vers le nord, ~45 minutes, jusqu’à Valley of the Gods.",null],["16:00","Choisissez votre butte, installez-vous, coucher de soleil depuis le van.",null]],"hikes":[["Wildcat Trail","5,1 km / 3,2 mi","La seule rando en autonomie dans la vallée"]],"nerd":["Aux Goosenecks, la rivière fait environ 10 km de boucles pour avancer de 2,5 km. Elle s’est enfoncée en gardant son ancien tracé de rivière paresseuse : c’est ça, un méandre encaissé.","Juste au-dessus de Valley of the Gods, la Moki Dugway (UT-261), c’est ~5 km de lacets en gravier qui montent de 335 m, construits en 1958 pour les camions de minerai d’uranium. Muley Point, en haut, a l’une des plus belles vues de la région.","Les buttes sont en grès De Chelly posé sur un schiste tendre, protégé par une couche dure au sommet. Retirez le chapeau et la butte devient aiguille, puis plus rien."],"alt":"Vous tenez aux Mittens au coucher du soleil : restez à Monument Valley jusqu’à 17 h 15 et dormez dans la zone gratuite près du rocher de Mexican Hat, à ~30 minutes. Le bivouac libre n’est pas autorisé en terre navajo, donc pas sur place.","sleep":"Valley of the Gods (BLM, gratuit, sans permis) : emplacements le long de la piste de 27 km, les plus faciles près des entrées. Piste en gravier, à vérifier avec le contrat (GPS 37.3158, −109.851).","sleepAt":{"n":"Bivouac Valley of the Gods","a":"Valley of the Gods Road, Mexican Hat, UT","ll":"37.3158, -109.851","k":"camp","lab":""},"music":[["Running on Empty","Jackson Browne","Dans la bande originale de Forrest Gump, pour le Forrest Gump Point."],["The Good, the Bad and the Ugly","Ennio Morricone","Pour l’arrivée face aux Mittens."]]},{"n":10,"date":"Jeudi 12 nov.","nd":"12 nov.","short":"Page et Grand Canyon","c":"#E0A06C","rock":"Calcaire Kaibab, ~270 millions d’années","title":"Antelope Canyon, puis le rebord","drive":"\u003cb>Valley of the Gods → Page → Grand Canyon\u003c/b>, ~420 km / 260 mi, ~5 h","sky":[["Lever","07:00, entre les buttes"],["Coucher","17:24, Lipan Point"],["Lune","6 %, se couche tôt"]],"sched":[["07:30","Réveil entre les buttes, départ par Monument Valley et Kayenta (les Mittens dans la lumière du matin depuis la route).",{"n":"Kayenta","a":"Kayenta, AZ","ll":"36.7272, -110.2546","k":"etape","lab":""}],["10:30","Page : Horseshoe Bend (parking payant, géré par la ville).",{"n":"Horseshoe Bend","a":"Horseshoe Bend, Page, AZ","ll":"36.8791, -111.5104","k":"rando","lab":""}],["12:00","Antelope Canyon, uniquement avec un guide navajo (réservé à l’avance). Midi est le meilleur moment pour la lumière dans le slot.",{"n":"Antelope Canyon","a":"Antelope Canyon, Page, AZ","ll":"36.903, -111.414","k":"rando","lab":"Page"}],["13:30","Déjeuner, puis US-89 vers le sud.",null],["15:30","Entrée par Desert View : la Watchtower de Mary Colter (1932), Navajo Point.",{"n":"Desert View Watchtower","a":"Desert View Watchtower, Grand Canyon","ll":"36.0441, -111.8261","k":"vue","lab":""}],["17:24","Coucher de soleil à Lipan Point, puis ~50 minutes jusqu’au bivouac de Tusayan.",{"n":"Lipan Point","a":"Lipan Point, Grand Canyon","ll":"36.0329, -111.858","k":"vue","lab":""}]],"hikes":[["Horseshoe Bend","2,4 km / 1,5 mi","Goudronné, facile"],["Visite d’Antelope Canyon","~1 h","Guidée"]],"nerd":["Le barrage de Glen Canyon fait 216 m de haut. Le lac Powell a mis 17 ans à se remplir, de 1963 à 1980.","Depuis Lipan Point, on voit la Grande Discordance : du grès horizontal de ~500 millions d’années posé directement sur une roche de ~1,7 milliard d’années. Plus d’un milliard d’années d’histoire ont tout simplement disparu.","Sous Lipan, on voit aussi les couches inclinées du Grand Canyon Supergroup, restes de montagnes arasées avant le dépôt des couches horizontales."],"alt":"Plus de place pour Antelope : les visites d’Antelope Canyon X ou de Waterholes Canyon se font en petits groupes et sont généralement moins prises d’assaut.","sleep":"Kaibab National Forest, gratuit et sans permis : Long Jim Loop, au bord de Tusayan (GPS 35.9788, −112.1302), ou la Forest Road 302 juste à côté. Les pistes partent du village, faciles à trouver de nuit. Pas de bivouac à moins de ~1,6 km des terrains aménagés ; évitez après la pluie ou la neige (boue).","sleepAt":{"n":"Bivouac Long Jim Loop","a":"Long Jim Loop, Tusayan, AZ","ll":"35.9788, -112.1302","k":"camp","lab":""},"music":[["Grand Canyon Suite","Ferde Grofé","Suite symphonique de 1931 inspirée du canyon ; ses mouvements « Sunrise » et « Sunset » collent aux belvédères."],["A Horse with No Name","America","Pour la longue route entre Kayenta et Page."]]},{"n":11,"date":"Vendredi 13 nov.","nd":"13 nov.","short":"Route 66","c":"#4F4A57","rock":"Schiste de Vishnu, ~1,75 milliard d’années","title":"Sous le rebord, puis la Route 66","drive":"\u003cb>Grand Canyon → Williams → Seligman → Kingman → Hoover Dam → Las Vegas\u003c/b>, ~480 km / 300 mi, ~5 h plus les arrêts ; on recule d’une heure au Nevada","sky":[["Lever","07:02, depuis les pins"],["Coucher","16:35 PST, Hoover Dam"],["Lune","12 %"]],"sched":[["07:00","Réveil dans les pins, 20 minutes jusqu’au rebord.",null],["08:00","Navette orange jusqu’au départ du South Kaibab (voitures particulières interdites).",null],["08:15","La rando du jour : South Kaibab jusqu’à Cedar Ridge, la plus belle vue pour l’effort au Grand Canyon. Pas d’eau sur ce sentier.",{"n":"South Kaibab","a":"South Kaibab Trailhead, Grand Canyon","ll":"36.053, -112.0839","k":"rando","lab":""}],["11:00","Trail of Time le long du rebord jusqu’au Yavapai Geology Museum.",{"n":"Yavapai Geology Museum","a":"Yavapai Geology Museum, Grand Canyon","ll":"36.0659, -112.1172","k":"vue","lab":"Grand Canyon"}],["12:30","Départ par Tusayan. Plein à Williams.",{"n":"Williams","a":"Williams, AZ","ll":"35.2495, -112.191","k":"etape","lab":""}],["14:15","Seligman, berceau de la renaissance de la Route 66.",{"n":"Seligman","a":"Seligman, AZ","ll":"35.3256, -112.8738","k":"etape","lab":""}],["15:15","Hackberry General Store, sur la Route 66.",{"n":"Hackberry General Store","a":"Hackberry General Store, Arizona","ll":"35.369, -113.724","k":"etape","lab":""}],["15:45 MST","Kingman, puis passage au Nevada : on gagne une heure.",{"n":"Kingman","a":"Kingman, AZ","ll":"35.1894, -114.053","k":"etape","lab":"Kingman"}],["16:00 PST","À pied sur le pont de contournement du barrage Hoover pour le coucher du soleil.",{"n":"Pont du barrage Hoover","a":"Mike O'Callaghan–Pat Tillman Memorial Bridge","ll":"36.0123, -114.742","k":"vue","lab":"Hoover Dam"}],["18:00","Las Vegas. Vider et nettoyer le van.",{"n":"Las Vegas","a":"Las Vegas, NV","ll":"36.1716, -115.1391","k":"etape","lab":""}]],"hikes":[["South Kaibab jusqu’à Ooh Aah Point","2,9 km / 1,8 mi","−240 m, puis la remontée"],["South Kaibab jusqu’à Cedar Ridge","4,8 km / 3 mi","−341 m, puis la remontée"]],"nerd":["Sur le Trail of Time, chaque mètre parcouru équivaut à un million d’années ; des repères en bronze décomptent jusqu’au schiste de Vishnu, ~1,75 milliard d’années, au niveau du fleuve.","Le rebord est en calcaire Kaibab, la même couche qui forme la base du Grand Staircase sous Zion et Bryce. Cherchez des brachiopodes fossiles et des tiges de crinoïdes dans les roches à vos pieds.","Angel Delgadillo, barbier à Seligman, a fondé la Historic Route 66 Association en 1987 et obtenu la protection de la route. Pixar l’a interviewé en préparant Cars.","Les tours de prise d’eau du barrage Hoover portent deux horloges, une à l’heure du Nevada et une à l’heure de l’Arizona. En novembre, elles ont une heure d’écart."],"alt":"En forme : Skeleton Point (9,7 km, −622 m) au lieu de Cedar Ridge, comptez 1 h 30 de plus. N’essayez pas l’aller-retour jusqu’au fleuve dans la journée ; le parc le déconseille fortement.","sleep":"Las Vegas.","sleepAt":null,"music":[["(Get Your Kicks on) Route 66","Nat King Cole","La version de 1946, pour Seligman et Hackberry."],["Life Is a Highway","Rascal Flatts","La version du film Cars, inspiré en partie par Seligman."],["When You Were Young","The Killers","Pour l’arrivée sur Las Vegas."]]},{"n":12,"date":"Samedi 14 nov.","nd":"14 nov.","short":"Retour","c":"#6C717B","rock":"Asphalte","title":"Rendre le van","drive":"\u003cb>Dans Las Vegas\u003c/b>","sky":[],"sched":[["Matin","Seulement si le retour est à midi : vidange des réservoirs, recharge du propane et plein au niveau convenu, photos du van, retour avant 12 h 00.",null]],"hikes":[],"nerd":[],"alt":"","sleep":"","sleepAt":null,"music":[["Leaving Las Vegas","Sheryl Crow","Pour rendre les clés."]]}],"avisTitle":"Notes sur l’itinéraire","avis":["Honnêtement, c’est un très bon itinéraire. La boucle est cohérente, novembre est un excellent choix (peu de monde, températures idéales pour marcher), et vous avez de la chance avec la nouvelle lune pile au milieu du voyage. Le fil géologique, du grès de Zion jusqu’au fond du Grand Canyon, donne en plus une vraie histoire au trajet. Les journées Escalante et Capitol Reef / Goblin Valley sont pour moi les plus sous-estimées : moins connues, mais parmi les plus belles.","Il y a quand même trois choses que je changerais ou surveillerais.","\u003cb>Le Grand Canyon est le parent pauvre.\u003c/b> C’est le site le plus spectaculaire du voyage, et il n’a qu’un coucher de soleil et une matinée, après une journée 10 chargée (Monument Valley → Page → Antelope → Grand Canyon, environ 5 h de route). Si je devais couper quelque chose, ce serait Page. Antelope Canyon est magnifique, mais c’est une visite guidée chère, très fréquentée, et sans les faisceaux de lumière en novembre. En allant directement de Monument Valley au Grand Canyon par Cameron (environ 3 h), vous gagnez un vrai après-midi sur le rebord, et le jour 10 devient reposant.","\u003cb>Le froid des bivouacs en altitude.\u003c/b> Les nuits près de Bryce (vers 2 300 m) et du Grand Canyon (vers 2 000 m) descendent sous les −5 °C, et la neige est possible dès novembre sur Boulder Mountain, Bryce et le rebord sud. Demandez au loueur si le van a un chauffage autonome (diesel ou gaz) qui tourne moteur coupé. Sans chauffage, ces nuits seront dures même avec de bons duvets.","\u003cb>Le van décide de beaucoup de choses.\u003c/b> La hauteur et la longueur sont bonnes pour le tunnel de Zion, et les pistes sont autorisées par le contrat. Restent deux réponses à obtenir avant le 3 novembre, pas au comptoir : la largeur d’un rétroviseur à l’autre (limite 2,39 m pour le tunnel) et le chauffage.","\u003cb>Transparence sur les recherches.\u003c/b> Les bivouacs de Bryce, du Grand Canyon, de Valley of the Gods et de Valley of Fire sont bien documentés. Ceux de Goblin Valley et de l’UT-313 reposent surtout sur des avis de voyageurs. Gardez une appli comme iOverlander hors ligne comme filet de sécurité.","\u003cb>Verdict :\u003c/b> ambitieux mais faisable au rythme actuel."],"footer":["Vérifié le 23 octobre 2026 : la surtaxe non-résident de 100 $ à Zion, Bryce et au Grand Canyon (Arches, Canyonlands et Capitol Reef en sont exemptés) et le pass annuel non-résident à 250 $ ; pas de réservation horaire à Arches en 2026 ; interdiction des grands véhicules sur la Zion–Mt Carmel Highway depuis le 7 juin 2026 ; navette de Zion en service jusqu’à fin novembre ; horaires de la loterie de la veille pour Angels Landing ; camping de Desert View fermé pour la saison ; fermeture au bivouac de ~14 000 acres autour de Zion décidée en mars 2026 ; Spencer Flat sèche et Hole-in-the-Rock boueuse au bulletin du BLM du 16 octobre 2026. Les spots de bivouac sont des zones connues et autorisées au moment de la vérification ; les règles locales changent, lisez les panneaux à l’entrée. Distances et temps de trajet approximatifs. Les distances de randonnée sont en aller-retour.","Retour du van : « 12am » le 14 novembre signifie strictement minuit entre le 13 et le 14. Le programme vous ramène à Vegas le soir du 13, donc ça marche dans les deux cas ; si c’est en fait midi, vous aurez une matinée tranquille."],"contractTitle":"Notes sur le contrat de location","contract":["Lecture du contrat Travellers Autobarn (version du 8 mai 2026, location au départ du Nevada). Ces notes ne sont pas un avis juridique ; en cas de doute, c’est le texte du contrat qui fait foi.","\u003cb>Les pistes, le point bloquant.\u003c/b> L’article 18.1 n’autorise que les routes goudronnées et les voies d’accès bien entretenues de moins de 500 yards (~450 m) menant à des campings ou parkings reconnus. Rouler ailleurs peut annuler l’assurance et la CDW, et vous rendre responsables de la totalité des dégâts. Un accord oral ne compte pas (article 31.2) : il faut une confirmation écrite. Le van peut être géolocalisé (article 27).","\u003cb>Bivouacs concernés.\u003c/b> Tom’s Best Spring, Spencer Flat, Wild Horse Road, Willow Springs, l’UT-313, Valley of the Gods et Long Jim Loop / FR 302 sont au bout de pistes de plus de 450 m, comme les options Hole-in-the-Rock et Valley Drive. Valley of Fire West est peut-être assez proche de la route, à vérifier sur place. Les campings payants du planning (Watchman, Goblin Valley State Park, Dead Horse Point, Mather) sont accessibles par le goudron.","\u003cb>CDW et assurance.\u003c/b> Sans CDW, vous êtes responsables de tous les dégâts (météo, route, vandalisme), plus l’immobilisation du van, le remorquage et les frais administratifs. La CDW saute en cas de conducteur non déclaré, de dégâts liés à une piste, de remorquage ou de sortie des États autorisés : Nevada, Arizona, Californie, Idaho, Oregon et Utah. Donc pas de crochet par le Colorado ni le Nouveau-Mexique (Four Corners, Mesa Verde). La responsabilité civile incluse est au minimum légal de chaque État ; la SLI (jusqu’à 500 000 $) vaut d’être étudiée. Vérifiez aussi votre carte bancaire : beaucoup de cartes françaises excluent les campervans.","\u003cb>Conducteurs.\u003c/b> Avec un permis français, permis international ou traduction certifiée en anglais obligatoire (article 8.1.2). Les deux conducteurs doivent avoir au moins 21 ans, être inscrits sur le contrat et le signer.","\u003cb>Dates et modifications.\u003c/b> Prise en charge de 9 h à 16 h du lundi au samedi : le mardi 3 novembre à 15 h passe. Retour avant 15 h du lundi au samedi : le samedi 14 novembre convient. Au-delà de 59 minutes de tolérance, 250 $ de pénalité puis 250 $ par jour. À moins de 14 jours du départ, chaque modification de réservation coûte 250 $, raccourcir la location ne donne aucun remboursement, et une prolongation demande un accord écrit.","\u003cb>Pendant le voyage.\u003c/b> Vérifier les niveaux et les pneus chaque jour, et signaler toute anomalie sous 24 h. Réparations jusqu’à 100 $ sans accord, au-delà accord écrit préalable. Les dépannages dus à une erreur (panne d’essence, crevaison, batterie vide, enlisement) sont à vos frais. Assistance réduite le dimanche 8 novembre (Capitol Reef et Goblin Valley, zone isolée) et le mercredi 11 novembre (Veterans Day). Les tunnels qui restreignent le propane sont interdits (article 9.2.3) : à vérifier au comptoir pour celui de Zion.","\u003cb>Frais au retour.\u003c/b> Plein d’essence manquant : prix local + 50 $. Propane pas plein : 50 $. Van non lavé et non aspiré : 100 $ (au moins 200 $ s’il est très sale). Les cartes Visa, Mastercard et Amex entraînent 4 % de frais par transaction. Interdits à bord : bougies, spirales anti-moustiques, cigarette et vapotage.","\u003cb>À demander par écrit avant le 3 novembre.\u003c/b> La tolérance exacte pour les pistes menant aux bivouacs, le prix de la CDW et de la SLI au départ du Nevada, et la largeur du van rétroviseurs compris."]}</script>
+<script id="app">(function(){
+"use strict";
+var DATA_SRC = document.getElementById("trip-data").textContent;
+var data = JSON.parse(DATA_SRC);
+var APP_SRC = document.getElementById("app").textContent;
+var CSS_SRC = document.getElementById("css").textContent;
+var HEAD = '<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">';
+var root = document.getElementById("root");
+var bar = document.getElementById("editbar");
+var editing = false, art = null, readOnly = false, saving = false, io = null, dlApi = null;
+var FILE_NAME = "road-trip-vegas-novembre-2026.html";
+function exportName(){
+  var d = new Date(), z = function(v){ return (v < 10 ? "0" : "") + v; };
+  return "road-trip-vegas-novembre-2026_" + d.getFullYear() + "-" + z(d.getMonth() + 1) + "-" + z(d.getDate()) + "_" + z(d.getHours()) + "h" + z(d.getMinutes()) + ".html";
+}
+function hashStr(t){ var h = 5381; for (var i = 0; i < t.length; i++) h = ((h << 5) + h + t.charCodeAt(i)) | 0; return String(h); }
+var BASE_HASH = hashStr(DATA_SRC);
+
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]; }); }
+function plain(html){ var t = document.createElement("template"); t.innerHTML = html || ""; return t.content.textContent; }
+function E(path, html, tag, cls){
+  tag = tag || "span";
+  return "<" + tag + (cls ? ' class="' + cls + '"' : "") + ' data-path="' + path + '"' + (editing ? ' contenteditable="true"' : "") + ">" + (html == null ? "" : html) + "</" + tag + ">";
+}
+function ADD(list, label){ return editing ? '<button type="button" class="add" data-add="' + list + '">+ ' + label + "</button>" : ""; }
+function DEL(path){ return editing ? '<button type="button" class="del" data-del="' + path + '" aria-label="Supprimer" title="Supprimer">×</button>' : ""; }
+
+/* per-viewer checklist ticks */
+var store = {
+  get: function(k){ try { return JSON.parse(localStorage.getItem(k) || "{}"); } catch(e){ return {}; } },
+  set: function(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
+};
+var done = store.get("sw-loop-todo");
+
+function renderTodo(){
+  var h = '<ul class="check">';
+  data.todo.forEach(function(t, i){
+    if (editing) {
+      h += '<li class="row"><div>' + E("todo." + i + ".0", t[0], "span", "when") + E("todo." + i + ".1", t[1], "span", "txt") + "</div>" + DEL("todo." + i) + "</li>";
+    } else {
+      h += '<li><label><input type="checkbox" data-i="' + i + '"' + (done[i] ? " checked" : "") + "><span><span class=\"when\">" + t[0] + "</span>" + t[1] + "</span></label></li>";
+    }
+  });
+  return h + "</ul>" + ADD("todo", "Ajouter une tâche");
+}
+
+function renderDay(d, i){
+  var p = "days." + i;
+  var h = '<article class="day" id="day' + d.n + '" style="--c:' + d.c + '">';
+  h += '<div class="core"><div class="num">' + d.n + "</div>" + E(p + ".date", d.date, "div", "date") +
+       '<div class="sample" role="img" aria-label="' + esc(plain(d.rock)) + '"></div>' + E(p + ".rock", d.rock, "div", "rock") + "</div>";
+  h += "<div>" + E(p + ".title", d.title, "h3") + E(p + ".drive", d.drive, "p", "drive");
+  if (d.sky.length || editing) {
+    h += '<ul class="sky">' + d.sky.map(function(s, j){ return "<li>" + E(p + ".sky." + j + ".0", s[0], "span", "lab") + " " + E(p + ".sky." + j + ".1", s[1]) + DEL(p + ".sky." + j) + "</li>"; }).join("") + (editing ? "" : weatherLi(d)) + "</ul>";
+    if (editing) h += ADD(p + ".sky", "Ajouter une info");
+  }
+  h += '<div class="cols"><div><ol class="sched">' + d.sched.map(function(s, j){
+    var pp = p + ".sched." + j;
+    return "<li>" + E(pp + ".0", s[0], "time") + '<div class="sc">' + E(pp + ".1", s[1]) + (editing ? placeEdit(s[2], pp + ".2") : placeView(s[2], MAP.idFor(d.n, j))) + "</div>" + DEL(pp) + "</li>";
+  }).join("") + "</ol>" + ADD(p + ".sched", "Ajouter une étape") + "</div><div>";
+  if (d.hikes.length || editing) {
+    h += '<table class="hikes"><caption>Randonnées</caption><tbody>' + d.hikes.map(function(r, j){
+      return "<tr>" + E(p + ".hikes." + j + ".0", r[0], "td") + E(p + ".hikes." + j + ".1", r[1], "td", "n") + E(p + ".hikes." + j + ".2", r[2], "td", "n") + (editing ? "<td>" + DEL(p + ".hikes." + j) + "</td>" : "") + "</tr>";
+    }).join("") + "</tbody></table>" + ADD(p + ".hikes", "Ajouter une rando");
+  }
+  if (d.nerd.length || editing) {
+    h += '<div class="nerd"><h4>Le coin nerd</h4><ul>' + d.nerd.map(function(x, j){ return "<li>" + E(p + ".nerd." + j, x) + DEL(p + ".nerd." + j) + "</li>"; }).join("") + "</ul>" + ADD(p + ".nerd", "Ajouter une note") + "</div>";
+  }
+  if ((d.music && d.music.length) || editing) {
+    var mu = d.music || [];
+    h += '<div class="music"><h4><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 12.2V3.5l7-1.5v8.4"/><circle cx="4.4" cy="12.2" r="1.6"/><circle cx="11.4" cy="10.4" r="1.6"/></svg>La bande-son du jour</h4><ul>' + mu.map(function(m, j){
+      var q = encodeURIComponent(plain(m[0]) + " " + plain(m[1])), mp = p + ".music." + j;
+      return "<li>" + (editing ? E(mp + ".0", m[0], "span", "mt") + " " + E(mp + ".1", m[1], "span", "ma") + E(mp + ".2", m[2], "span", "mn") + DEL(mp)
+        : '<span class="mt">' + m[0] + '</span> <span class="ma">' + m[1] + "</span>" + (m[2] ? '<span class="mn">' + m[2] + "</span>" : "") +
+          '<span class="ml"><a href="https://www.youtube.com/results?search_query=' + q + '" target="_blank" rel="noopener">YouTube</a></span>') + "</li>";
+    }).join("") + "</ul>" + ADD(p + ".music", "Ajouter un morceau") + "</div>";
+  }
+  if (d.alt || editing) h += '<div class="alt"><h4>Si les plans changent</h4>' + E(p + ".alt", d.alt, "p") + "</div>";
+  if (d.sleep || d.sleepAt || editing) h += '<div class="sleepbox"><p class="sleep"><b>Dormir\u202f:</b> ' + E(p + ".sleep", d.sleep) + "</p>" + (editing ? placeEdit(d.sleepAt, p + ".sleepAt") : placeView(d.sleepAt, "d" + d.n + "n")) + "</div>";
+  return h + "</div></div></div></article>";
+}
+
+function render(){
+  var h = '<header class="wrap hero"><div><h1>' + E("title", data.title, "span", "h1main") + E("subtitle", data.subtitle, "span", "h1sub") + "</h1>" +
+    E("lede", data.lede, "p", "lede") + '<ul class="facts">' + data.facts.map(function(f, i){ return "<li>" + E("facts." + i + ".0", f[0], "b") + " " + E("facts." + i + ".1", f[1]) + "</li>"; }).join("") + "</ul></div>" +
+    '</header>' + MAP.markup();
+  h += '<nav class="strata" aria-label="Aller à un jour"><ol>' + data.days.map(function(d){
+    return '<li><a href="#day' + d.n + '" style="--c:' + d.c + '" data-n="' + d.n + '"><b>' + d.n + "</b><small>" + d.nd + "</small><small>" + d.short + "</small></a></li>";
+  }).join("") + "</ol></nav>";
+  h += '<main class="wrap"><h2 class="sec" id="prep">' + E("prepTitle", data.prepTitle) + "</h2>" + E("prepSub", data.prepSub, "p", "sub");
+  h += '<div class="prep"><section class="panel"><h3>' + E("todoTitle", data.todoTitle) + "</h3>" + renderTodo() + "</section>";
+  h += '<section class="panel notes"><h3>' + E("notesTitle", data.notesTitle) + "</h3>" + data.notes.map(function(x, i){
+    return '<p class="' + (editing ? "row" : "") + '">' + E("notes." + i, x) + DEL("notes." + i) + "</p>";
+  }).join("") + ADD("notes", "Ajouter un paragraphe");
+  h += '<div class="scroll"><table class="weather"><thead><tr>' + data.weather.head.map(function(x, j){ return E("weather.head." + j, x, "th"); }).join("") + "</tr></thead><tbody>" +
+    data.weather.rows.map(function(r, i){ return "<tr>" + r.map(function(c, j){ return E("weather.rows." + i + "." + j, c, "td"); }).join("") + "</tr>"; }).join("") + "</tbody></table></div></section></div>";
+  h += '<h2 class="sec">' + E("daysTitle", data.daysTitle) + "</h2>" + E("daysSub", data.daysSub, "p", "sub") + '<div id="days">' + data.days.map(renderDay).join("") + "</div>";
+  h += '<h2 class="sec" id="avis">' + E("avisTitle", data.avisTitle) + '</h2><section class="panel notes avis">' + data.avis.map(function(x, i){
+    return '<p class="' + (editing ? "row" : "") + '">' + E("avis." + i, x) + DEL("avis." + i) + "</p>";
+  }).join("") + ADD("avis", "Ajouter un paragraphe") + "</section>";
+  if (data.contract) h += '<h2 class="sec" id="contrat">' + E("contractTitle", data.contractTitle) + '</h2><section class="panel notes avis">' + data.contract.map(function(x, i){
+    return '<p class="' + (editing ? "row" : "") + '">' + E("contract." + i, x) + DEL("contract." + i) + "</p>";
+  }).join("") + ADD("contract", "Ajouter un paragraphe") + "</section>";
+  h += "</main>";
+  h += '<footer class="wrap">' + data.footer.map(function(x, i){ return '<p class="' + (editing ? "row" : "") + '">' + E("footer." + i, x) + DEL("footer." + i) + "</p>"; }).join("") + ADD("footer", "Ajouter un paragraphe") + "</footer>";
+  root.innerHTML = h;
+  document.body.classList.toggle("editing", editing);
+  MAP.mount();
+  watchNav();
+  renderBar();
+}
+
+var PIN = '<svg class="pin" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 15s5-4.6 5-8.5A5 5 0 0 0 3 6.5C3 10.4 8 15 8 15z"/><circle cx="8" cy="6.5" r="1.8"/></svg>';
+/* map: built entirely from the places attached to each day's steps */
+function parseLL(v){
+  var t = plain(v || "").replace(/\u2212/g, "-");
+  var m = t.match(/(-?\d{1,3}\.\d+)\s*[,;\s]\s*(-?\d{1,3}\.\d+)/) || t.match(/@(-?\d{1,3}(?:\.\d+)?),(-?\d{1,3}(?:\.\d+)?)/);
+  if (!m) return null;
+  var la = parseFloat(m[1]), lo = parseFloat(m[2]);
+  if (!(la >= -90 && la <= 90 && lo >= -180 && lo <= 180)) return null;
+  return [la, lo];
+}
+var KIND = { etape:"Étape", rando:"Rando", vue:"Belvédère", camp:"Bivouac gratuit", campp:"Camping payant" };
+var KORDER = ["etape","rando","vue","camp","campp"];
+function gq(q){ return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q); }
+function placeQuery(p){ var a = plain(p.a).trim(); if (a) return a; var ll = parseLL(p.ll); return ll ? ll.join(",") : plain(p.n); }
+
+var MAP = (function(){
+  var S = {}, R = {};
+  function build(){
+    S = {}; R = {};
+    var prevNight = null;
+    data.days.forEach(function(d, i){
+      var n = d.n, list = [];
+      if (prevNight) list.push(prevNight);
+      d.sched.forEach(function(row, j){
+        var p = row[2]; if (!p) return;
+        var ll = parseLL(p.ll), id = "d" + n + "s" + j;
+        S[id] = { n:plain(p.n) || "Sans nom", la:ll ? ll[0] : null, lo:ll ? ll[1] : null, q:placeQuery(p), k:KIND[p.k] ? p.k : "vue", note:plain(row[1]), time:plain(row[0]), lab:plain(p.lab || ""), day:n };
+        if (ll) list.push(id); else list.push("!" + id);
+      });
+      var night = null;
+      if (d.sleepAt) {
+        var sp = d.sleepAt, sll = parseLL(sp.ll), nid = "d" + n + "n";
+        S[nid] = { n:plain(sp.n) || "Nuit", la:sll ? sll[0] : null, lo:sll ? sll[1] : null, q:placeQuery(sp), k:KIND[sp.k] ? sp.k : "camp", note:plain(d.sleep), time:"Nuit", lab:plain(sp.lab || ""), day:n };
+        if (sll) { list.push(nid); night = nid; } else list.push("!" + nid);
+      }
+      R[n] = list;
+      prevNight = night;
+    });
+  }
+  function onMap(id){ return id.charAt(0) !== "!" && S[id] && S[id].la !== null; }
+  function route(n){ return (R[n] || []).filter(onMap); }
+  function hasDay(n){ return (R[n] || []).some(function(id){ return id.charAt(0) !== "!"; }); }
+
+  var W = {
+    colorado:[[38.80,-109.25],[38.68,-109.42],[38.57,-109.56],[38.47,-109.66],[38.47,-109.74],[38.36,-109.80],[38.19,-109.89],[37.95,-110.15],[37.88,-110.39],[37.55,-110.70],[37.30,-110.95],[37.10,-111.20],[36.98,-111.43],[36.94,-111.48],[36.87,-111.59],[36.50,-111.80],[36.19,-111.80],[36.10,-111.92],[36.10,-112.10],[36.25,-112.40],[36.39,-112.63],[36.30,-112.76],[36.10,-113.05],[35.85,-113.30],[35.77,-113.37],[35.95,-113.70],[36.12,-113.98],[36.10,-114.30],[36.02,-114.74],[35.70,-114.67],[35.40,-114.60],[34.90,-114.62]],
+    powell:[[36.94,-111.48],[36.98,-111.43],[37.10,-111.20],[37.30,-110.95],[37.55,-110.70],[37.88,-110.39]],
+    mead:[[36.12,-113.98],[36.10,-114.30],[36.07,-114.55],[36.02,-114.74]],
+    overton:[[36.10,-114.40],[36.30,-114.38],[36.48,-114.37]],
+    green:[[39.40,-110.12],[38.99,-110.15],[38.70,-110.05],[38.45,-109.98],[38.19,-109.89]],
+    sanjuan:[[37.32,-109.30],[37.28,-109.55],[37.15,-109.86],[37.17,-109.93],[37.20,-110.20],[37.18,-110.60],[37.22,-110.90]],
+    virgin:[[37.29,-112.95],[37.20,-112.99],[37.18,-113.25],[37.10,-113.58],[36.90,-113.95],[36.80,-114.07],[36.60,-114.30],[36.48,-114.37]],
+    lcr:[[35.40,-111.00],[35.70,-111.25],[35.88,-111.41],[36.19,-111.80]]
+  };
+
+  var BASE = {
+    roads:[
+      ["15","i",[[35.27,-116.07],[35.61,-115.39],[36.06,-115.17],[36.17,-115.14],[36.33,-114.93],[36.51,-114.76],[36.66,-114.56],[36.80,-114.07],[36.89,-113.93],[37.10,-113.58],[37.24,-113.36],[37.54,-113.18],[37.68,-113.06],[37.84,-112.83],[38.27,-112.64],[38.60,-112.58],[39.30,-112.30]],[4,13]],
+      ["70","i",[[38.60,-112.58],[38.77,-112.08],[38.96,-111.86],[38.90,-111.30],[38.87,-110.70],[38.99,-110.16],[38.94,-109.82],[38.97,-109.71],[39.10,-109.05],[39.20,-108.60]],[3,6]],
+      ["40","i",[[34.85,-114.61],[35.19,-114.05],[35.28,-113.60],[35.31,-112.88],[35.22,-112.48],[35.25,-112.19],[35.20,-111.65],[35.10,-111.10],[35.02,-110.70],[34.90,-110.16],[35.05,-109.50],[35.10,-109.05],[35.30,-108.50]],[2,8]],
+      ["93","us",[[36.17,-115.14],[35.98,-114.83],[36.01,-114.74],[35.80,-114.48],[35.45,-114.20],[35.19,-114.05],[34.60,-113.60]],[3]],
+      ["66","hist",[[35.19,-114.05],[35.37,-113.72],[35.53,-113.42],[35.33,-112.88]],[1]],
+      ["64","st",[[35.25,-112.19],[35.65,-112.14],[35.97,-112.13],[36.05,-112.14],[36.02,-111.95],[36.04,-111.83],[35.95,-111.60],[35.88,-111.41]],[1]],
+      ["180","us",[[35.20,-111.65],[35.45,-111.85],[35.65,-112.14]],[1]],
+      ["89","us",[[35.20,-111.65],[35.55,-111.50],[35.88,-111.41],[36.30,-111.47],[36.63,-111.64],[36.91,-111.46],[37.08,-111.66],[37.05,-112.53],[37.23,-112.68],[37.48,-112.53],[37.65,-112.43],[37.75,-112.40],[37.82,-112.43],[38.17,-112.27],[38.58,-112.25]],[3,6,12]],
+      ["9","st",[[37.15,-113.48],[37.18,-113.29],[37.20,-113.19],[37.19,-112.99],[37.21,-112.94],[37.23,-112.68]],[1]],
+      ["59","st",[[37.18,-113.29],[37.00,-112.97],[36.95,-112.53],[37.05,-112.53]],[1]],
+      ["12","st",[[37.75,-112.40],[37.74,-112.31],[37.67,-112.15],[37.62,-112.08],[37.56,-111.99],[37.77,-111.60],[37.79,-111.41],[37.91,-111.42],[38.10,-111.38],[38.30,-111.42]],[4,8]],
+      ["24","st",[[38.84,-111.97],[38.40,-111.64],[38.30,-111.42],[38.28,-111.25],[38.27,-111.00],[38.37,-110.71],[38.66,-110.66],[38.94,-110.44]],[4,6]],
+      ["191","us",[[38.94,-109.82],[38.62,-109.62],[38.57,-109.55],[38.31,-109.39],[37.87,-109.34],[37.62,-109.48],[37.28,-109.55],[36.94,-109.53],[36.15,-109.55]],[3,7]],
+      ["313","st",[[38.62,-109.67],[38.52,-109.80],[38.47,-109.82],[38.38,-109.87],[38.31,-109.86]],[1]],
+      ["163","us",[[37.28,-109.55],[37.15,-109.86],[37.00,-110.10],[36.72,-110.25]],[2]],
+      ["160","us",[[36.99,-109.05],[36.94,-109.53],[36.72,-110.25],[36.56,-110.66],[36.32,-110.96],[36.13,-111.24],[36.07,-111.38]],[1,4]],
+      ["98","st",[[36.56,-110.66],[36.80,-111.10],[36.91,-111.45]],[1]],
+      ["169","st",[[36.50,-114.80],[36.43,-114.51],[36.54,-114.45]],[0]]
+    ],
+    parks:[
+      ["Zion",[[37.15,-113.05],[37.15,-112.92],[37.25,-112.85],[37.35,-112.85],[37.45,-113.00],[37.48,-113.20],[37.40,-113.22],[37.30,-113.10],[37.20,-113.10]],[37.33,-113.06]],
+      ["Bryce Canyon",[[37.68,-112.20],[37.68,-112.12],[37.55,-112.13],[37.45,-112.22],[37.44,-112.27],[37.55,-112.21]],[37.42,-112.31]],
+      ["Capitol Reef",[[38.47,-111.40],[38.45,-111.15],[38.20,-111.08],[37.90,-111.00],[37.60,-110.90],[37.57,-111.00],[37.90,-111.15],[38.20,-111.30],[38.30,-111.45]],[37.72,-111.06]],
+      ["Arches",[[38.82,-109.68],[38.82,-109.53],[38.70,-109.48],[38.62,-109.52],[38.60,-109.62],[38.70,-109.66]],[38.80,-109.47]],
+      ["Canyonlands",[[38.55,-110.00],[38.50,-109.75],[38.30,-109.70],[38.10,-109.60],[37.95,-109.70],[37.95,-110.05],[38.15,-110.20],[38.35,-110.15]],[38.10,-109.95]],
+      ["Grand Canyon",[[36.70,-111.75],[36.20,-111.80],[35.98,-112.00],[36.05,-112.40],[36.10,-112.90],[35.95,-113.30],[36.00,-113.70],[36.15,-113.95],[36.35,-113.75],[36.45,-113.30],[36.40,-112.70],[36.45,-112.30],[36.35,-112.00],[36.75,-111.85]],[36.33,-112.55]],
+      ["Valley of Fire",[[36.47,-114.60],[36.50,-114.48],[36.40,-114.45],[36.38,-114.57]],null]
+    ],
+    relief:[[36.25,-115.65,.25,.30],[36.55,-112.20,.35,.45],[37.60,-112.75,.35,.35],[37.55,-112.25,.15,.25],[38.05,-111.55,.30,.30],[38.00,-110.80,.15,.30],[38.45,-109.25,.15,.18],[37.85,-109.45,.10,.12],[37.03,-110.87,.08,.08],[35.35,-111.68,.15,.15]],
+    peaks:[["Mt Charleston",36.272,-115.695,"3 633 m"],["Brian Head",37.681,-112.832,"3 446 m"],["Bluebell Knoll",38.175,-111.505,"3 451 m"],["Mt Ellen",38.108,-110.813,"3 512 m"],["Mt Peale",38.438,-109.229,"3 877 m"],["Abajo Peak",37.840,-109.460,"3 463 m"],["Navajo Mountain",37.034,-110.869,"3 166 m"],["Humphreys Peak",35.346,-111.678,"3 851 m"]],
+    towns:[["St George",37.10,-113.58],["Cedar City",37.68,-113.06],["Kanab",37.05,-112.53],["Panguitch",37.82,-112.43],["Richfield",38.77,-112.08],["Hanksville",38.37,-110.71],["Green River",38.99,-110.16],["Monticello",37.87,-109.34],["Blanding",37.62,-109.48],["Bluff",37.28,-109.55],["Tuba City",36.13,-111.24],["Flagstaff",35.20,-111.65],["Mesquite",36.80,-114.07],["Boulder City",35.98,-114.83],["Moab",38.57,-109.55],["Page",36.91,-111.46]]
+  };
+  var K = 96, cosl = Math.cos(37 * Math.PI / 180);
+  function xy(lat, lon){ return [((lon + 116.3) * cosl * K + 50), ((39.25 - lat) * K + 10)]; }
+  function pt(id){ return xy(S[id].la, S[id].lo); }
+  var view = { x:0, y:0, w:720, h:440 }, sel = 0, selStop = null, anim = null, pend = 0;
+  function color(n){ for (var i = 0; i < data.days.length; i++) if (data.days[i].n === n) return data.days[i].c; return "#888"; }
+  function gdir(ids){
+    var q = ids.filter(function(id){ return S[id.replace("!", "")]; }).map(function(id){ return S[id.replace("!", "")].q; });
+    q = q.filter(function(x, i){ return i === 0 || x !== q[i - 1]; });
+    if (q.length < 2) return gq(q[0] || "");
+    var o = q[0], d = q[q.length - 1], mid = q.slice(1, -1);
+    if (mid.length > 9) { var step = mid.length / 9, m2 = []; for (var i = 0; i < 9; i++) m2.push(mid[Math.floor(i * step)]); mid = m2; }
+    return "https://www.google.com/maps/dir/?api=1&travelmode=driving&origin=" + encodeURIComponent(o) + "&destination=" + encodeURIComponent(d) + (mid.length ? "&waypoints=" + encodeURIComponent(mid.join("|")) : "");
+  }
+  function line(pts){ return pts.map(function(p){ return p[0].toFixed(2) + "," + p[1].toFixed(2); }).join(" "); }
+  function frame(){ var f = document.getElementById("map"); return f ? f.getBoundingClientRect() : { width:720, height:440 }; }
+  function k(){ var r = frame(); return Math.min((r.width || 720) / view.w, (r.height || 440) / view.h) || 1; }
+  function setVB(){ var svg = document.getElementById("map"); if (svg) svg.setAttribute("viewBox", view.x + " " + view.y + " " + view.w + " " + view.h); }
+  function later(){ if (!pend) pend = requestAnimationFrame(function(){ pend = 0; draw(); }); }
+
+  function draw(){
+    var svg = document.getElementById("map"); if (!svg) return;
+    setVB();
+    var s = k(), h = "";
+    h += '<rect x="-3000" y="-3000" width="7000" height="7000" class="mbg"/>';
+    h += '<defs><radialGradient id="rlfg"><stop offset="0" class="rlf0"/><stop offset=".6" class="rlf1"/><stop offset="1" class="rlf2"/></radialGradient></defs>';
+    BASE.relief.forEach(function(r){ var c = xy(r[0], r[1]); h += '<ellipse class="relief" cx="' + c[0] + '" cy="' + c[1] + '" rx="' + (r[3] * cosl * K) + '" ry="' + (r[2] * K * 1.2) + '"/>'; });
+    BASE.parks.forEach(function(pk){
+      h += '<polygon class="park" points="' + line(pk[1].map(function(p){ return xy(p[0], p[1]); })) + '"/>';
+      if (pk[2] && s >= 2.2 && s < 9) { var lp = xy(pk[2][0], pk[2][1]); h += '<text class="pklab" x="' + lp[0] + '" y="' + lp[1] + '" text-anchor="middle" font-size="' + (11 / s) + '">' + pk[0] + "</text>"; }
+    });
+    for (var la = 30; la <= 44; la++) { var a = xy(la, -125), b = xy(la, -100); h += '<line class="grat" x1="' + a[0] + '" y1="' + a[1] + '" x2="' + b[0] + '" y2="' + b[1] + '"/>'; if (la >= 35 && la <= 39) { var lp = xy(la, -116.25); h += '<text class="gl" x="' + lp[0] + '" y="' + (lp[1] - 3 / s) + '" font-size="' + (10 / s) + '">' + la + "°N</text>"; } }
+    for (var lo = -125; lo <= -100; lo++) { var c = xy(45, lo), d = xy(29, lo); h += '<line class="grat" x1="' + c[0] + '" y1="' + c[1] + '" x2="' + d[0] + '" y2="' + d[1] + '"/>'; if (lo >= -116 && lo <= -109) { var lq = xy(35.0, lo); h += '<text class="gl" x="' + (lq[0] + 3 / s) + '" y="' + lq[1] + '" font-size="' + (10 / s) + '">' + (-lo) + "°O</text>"; } }
+    function L(a1, b1, c1, d1){ var p = xy(a1, b1), q = xy(c1, d1); return '<line class="st" x1="' + p[0] + '" y1="' + p[1] + '" x2="' + q[0] + '" y2="' + q[1] + '"/>'; }
+    h += L(42,-114.05,37,-114.05) + L(37,-114.05,37,-109.05) + L(42,-109.05,31.3,-109.05) + L(37,-114.05,36.1,-114.05) + L(37,-109.05,37,-102) + L(41,-111.05,41,-114.05);
+    var big = function(t, la2, lo2){ var p = xy(la2, lo2); return '<text class="stn" x="' + p[0] + '" y="' + p[1] + '" font-size="' + (15 / s) + '">' + t + "</text>"; };
+    h += big("Nevada", 38.95, -116.1) + big("Utah", 38.95, -113.6) + big("Arizona", 35.15, -111.0) + big("Colo.", 38.95, -109.0) + big("N.-M.", 35.15, -109.0);
+    Object.keys(W).forEach(function(key){
+      var cls = (key === "powell" || key === "mead" || key === "overton") ? "lake" : "river";
+      h += '<polyline class="' + cls + '" points="' + line(W[key].map(function(p){ return xy(p[0], p[1]); })) + '"/>';
+    });
+    var rl = function(t, la3, lo3, rot){ var p = xy(la3, lo3); return '<text class="rl" font-size="' + (10.5 / s) + '" transform="translate(' + p[0] + "," + p[1] + ") rotate(" + rot + ')">' + t + "</text>"; };
+    h += rl("Colorado", 36.32, -113.15, 20) + rl("Lac Powell", 37.42, -110.95, -42) + rl("Lac Mead", 36.17, -114.25, 0) + rl("Green River", 38.62, -110.02, 75) + rl("San Juan", 37.27, -110.45, 0) + rl("Virgin", 36.98, -113.85, -35) + rl("Little Colorado", 35.62, -111.15, 48);
+    var RW = { i:[4.4, 2.6], us:[3.4, 1.8], st:[2.8, 1.3], hist:[2.6, 1.4] };
+    BASE.roads.forEach(function(rd){ var pts = line(rd[2].map(function(p){ return xy(p[0], p[1]); })); h += '<polyline class="rdc rd-' + rd[1] + '" stroke-width="' + RW[rd[1]][0] + '" points="' + pts + '"/>'; });
+    BASE.roads.forEach(function(rd){ var pts = line(rd[2].map(function(p){ return xy(p[0], p[1]); })); h += '<polyline class="rdf rd-' + rd[1] + '" stroke-width="' + RW[rd[1]][1] + '" points="' + pts + '"/>'; });
+    BASE.towns.forEach(function(t){ var p = xy(t[1], t[2]); h += '<circle class="town" cx="' + p[0] + '" cy="' + p[1] + '" r="' + (2.3 / s) + '"/>'; });
+    BASE.peaks.forEach(function(pk){ var p = xy(pk[1], pk[2]), z = 4.2 / s; h += '<path class="peak" d="M' + p[0] + "," + (p[1] - z) + "L" + (p[0] + z) + "," + (p[1] + z * 0.7) + "L" + (p[0] - z) + "," + (p[1] + z * 0.7) + 'Z"/>'; });
+    Object.keys(R).forEach(function(nk){
+      var n = +nk, ids = route(n); if (ids.length < 2) return;
+      var pts = line(ids.map(pt)), dim = sel && sel !== n;
+      h += '<polyline class="rcase' + (dim ? " dim" : "") + '" points="' + pts + '"/><polyline class="rline' + (dim ? " dim" : "") + '" stroke="' + color(n) + '" points="' + pts + '"/>';
+    });
+    var showAll = s >= 5, labs = [], boxes = [], drawn = {};
+    Object.keys(S).forEach(function(id){
+      var st = S[id]; if (st.la === null) return;
+      var key = st.la.toFixed(4) + "," + st.lo.toFixed(4) + st.n; if (drawn[key] && selStop !== id) return; drawn[key] = 1;
+      var p = xy(st.la, st.lo), n = st.day, inSel = sel && route(sel).indexOf(id) >= 0, dim = sel && !inSel, active = selStop === id;
+      var r = (st.k === "etape" ? 4.2 : 3.6) / s, sym;
+      if (st.k === "camp" || st.k === "campp") {
+        var z = 5.5 / s;
+        sym = '<path class="msym camp' + (st.k === "campp" ? " paid" : "") + '" d="M' + p[0] + "," + (p[1] - z) + "L" + (p[0] + z) + "," + (p[1] + z * 0.8) + "L" + (p[0] - z) + "," + (p[1] + z * 0.8) + 'Z"/>';
+      } else {
+        sym = '<circle class="msym ' + st.k + '" cx="' + p[0] + '" cy="' + p[1] + '" r="' + r + '" fill="' + (st.k === "rando" ? color(n) : "var(--surface)") + '" stroke="' + color(n) + '"/>';
+      }
+      var isHub = !sel && !showAll && st.lab;
+      if (active || (sel ? inSel : (showAll || st.lab))) labs.push({ id:id, p:p, txt:isHub ? st.lab : st.n, hub:isHub, pri:active ? 0 : (isHub ? 1 : 2) });
+      h += '<g class="mstop' + (dim ? " dim" : "") + (active ? " on" : "") + '" data-stop="' + id + '" tabindex="0" role="button" aria-label="' + esc(st.n) + '"><circle class="hit" cx="' + p[0] + '" cy="' + p[1] + '" r="' + (11 / s) + '"/>' + sym + "</g>";
+    });
+    var FR = frame(), FW = FR.width || 720, FH = FR.height || 440;
+    BASE.roads.forEach(function(rd){ rd[3].forEach(function(ix){ var a1 = xy(rd[2][ix][0], rd[2][ix][1]), b1 = xy(rd[2][ix + 1][0], rd[2][ix + 1][1]); labs.push({ kind:"shield", cls:rd[1], txt:rd[0], p:[(a1[0] + b1[0]) / 2, (a1[1] + b1[1]) / 2], pri:3 }); }); });
+    if (s >= 1.1) BASE.towns.forEach(function(t){ labs.push({ kind:"town", txt:t[0], p:xy(t[1], t[2]), pri:4 }); });
+    BASE.peaks.forEach(function(pk){ labs.push({ kind:"peak", txt:pk[0] + " " + pk[3], p:xy(pk[1], pk[2]), pri:5 }); });
+    function blocked(bx){
+      if (bx.x0 < 2 || bx.y0 < 2 || bx.x1 > FW - 2 || bx.y1 > FH - 2 || (bx.x1 > FW - 56 && bx.y0 < 128)) return true;
+      for (var q = 0; q < boxes.length; q++) { var B = boxes[q]; if (bx.x0 < B.x1 && bx.x1 > B.x0 && bx.y0 < B.y1 && bx.y1 > B.y0) return true; }
+      return false;
+    }
+    labs.sort(function(x, y){ return x.pri - y.pri; });
+    labs.forEach(function(L0){
+      var sx = (L0.p[0] - view.x) * s, sy = (L0.p[1] - view.y) * s;
+      if (L0.kind === "shield") {
+        var sw = L0.txt.length * 6.4 + 9, sh = 15, bs = { x0:sx - sw / 2 - 1, y0:sy - sh / 2 - 1, x1:sx + sw / 2 + 1, y1:sy + sh / 2 + 1 };
+        if (blocked(bs)) return;
+        boxes.push(bs);
+        h += '<g class="shield sh-' + L0.cls + '"><rect x="' + (L0.p[0] - sw / 2 / s) + '" y="' + (L0.p[1] - sh / 2 / s) + '" width="' + (sw / s) + '" height="' + (sh / s) + '" rx="' + ((L0.cls === "st" ? 7.5 : 3) / s) + '" stroke-width="' + (1.2 / s) + '"/><text x="' + L0.p[0] + '" y="' + (L0.p[1] + 3.6 / s) + '" text-anchor="middle" font-size="' + (10 / s) + '">' + L0.txt + "</text></g>";
+        return;
+      }
+      var base = L0.kind === "town" || L0.kind === "peak";
+      var fs = L0.kind === "town" ? 11 : (L0.kind === "peak" ? 10.5 : (L0.hub ? 14 : 12)), w = L0.txt.length * fs * 0.5 + 4, hgt = fs + 2;
+      var cands = base ? [[6,4,"start"],[-6,4,"end"],[0,-8,"middle"],[0,15,"middle"]] : [[8,4,"start"],[-8,4,"end"],[0,-10,"middle"],[0,17,"middle"],[8,-8,"start"],[-8,-8,"end"],[8,15,"start"],[-8,15,"end"]];
+      var pick = null;
+      for (var c = 0; c < cands.length && !pick; c++) {
+        var o = cands[c], x0 = o[2] === "start" ? sx + o[0] : (o[2] === "end" ? sx + o[0] - w : sx - w / 2), y0 = sy + o[1] - fs + 2;
+        var bx = { x0:x0, y0:y0, x1:x0 + w, y1:y0 + hgt };
+        if (!blocked(bx)) { pick = o; boxes.push(bx); }
+      }
+      if (!pick) { if (L0.pri > 1) return; pick = cands[0]; }
+      var cls = L0.kind === "town" ? "tlab" : (L0.kind === "peak" ? "plab" : "mlab" + (L0.hub ? " hub" : ""));
+      h += '<text class="' + cls + '"' + (base ? "" : ' data-stop="' + L0.id + '"') + ' x="' + (L0.p[0] + pick[0] / s) + '" y="' + (L0.p[1] + pick[1] / s) + '" text-anchor="' + pick[2] + '" font-size="' + (fs / s) + '" stroke-width="' + (3 / s) + '">' + esc(L0.txt) + "</text>";
+    });
+    var tmp = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    tmp.innerHTML = h;
+    var layer = svg.querySelector("g.mlayer");
+    if (!layer) { layer = document.createElementNS("http://www.w3.org/2000/svg", "g"); layer.setAttribute("class", "mlayer"); svg.appendChild(layer); }
+    layer.replaceChildren.apply(layer, [].slice.call(tmp.childNodes));
+    info();
+    [].forEach.call(document.querySelectorAll(".mchip"), function(b){ b.setAttribute("aria-pressed", String(+b.dataset.day === sel)); });
+  }
+
+  function info(){
+    var el = document.getElementById("mapinfo"); if (!el) return;
+    var h = "", total = Object.keys(S).length, onmap = Object.keys(S).filter(function(id){ return S[id].la !== null; }).length;
+    if (selStop && S[selStop]) {
+      var st = S[selStop];
+      h += '<div class="mcard"><p class="mk">' + KIND[st.k] + ", jour " + st.day + (st.time ? ", " + esc(st.time) : "") + "</p><h3>" + esc(st.n) + "</h3><p>" + esc(st.note) + '</p>' + (st.la !== null ? '<p class="gps"><span class="mk">GPS</span> <span class="gpsv" title="Sélectionnez pour copier">' + st.la.toFixed(4) + ", " + st.lo.toFixed(4) + "</span></p>" : "") + '<a class="gbtn" href="' + gq(st.q) + '" target="_blank" rel="noopener">' + PIN + "Ouvrir dans Google Maps</a></div>";
+    }
+    if (sel) {
+      var d = data.days[sel - 1], ids = (R[sel] || []).map(function(x){ return x.replace("!", ""); }).filter(function(id, i, a){ return a.indexOf(id) === i; });
+      h += '<div class="mday"><p class="mk">Jour ' + sel + ", " + esc(plain(d.date)) + "</p><h3>" + esc(plain(d.title)) + '</h3><ol class="mlist">' + ids.map(function(id){
+        var st = S[id], off = st.la === null;
+        return "<li>" + (off ? '<span class="moff">' + esc(st.n) + "</span>" : '<button type="button" class="mlink" data-stop="' + id + '">' + esc(st.n) + "</button>") + ' <span class="mk">' + (st.day !== sel ? "Départ" : esc(st.time)) + (off ? ", sans coordonnées" : "") + "</span></li>";
+      }).join("") + '</ol><a class="gbtn" href="' + gdir(R[sel] || []) + '" target="_blank" rel="noopener">' + PIN + "Itinéraire du jour dans Google Maps</a></div>";
+    } else if (!selStop) {
+      var all = []; Object.keys(R).forEach(function(n){ all = all.concat(R[n]); });
+      var half = Math.ceil(all.length / 2), pick = function(arr){ var out = [], step = Math.max(1, (arr.length - 1) / 8); for (var i = 0; i < arr.length; i += step) out.push(arr[Math.round(i)]); if (out[out.length - 1] !== arr[arr.length - 1]) out.push(arr[arr.length - 1]); return out; };
+      h += '<div class="mday"><p>' + total + " lieux sur " + Object.keys(R).filter(function(n){ return hasDay(+n); }).length + " jours" + (onmap < total ? ", dont " + (total - onmap) + " sans coordonnées (hors carte)" : "") + ". Choisissez un jour ou touchez un point ; faites glisser pour vous déplacer, molette ou pincement pour zoomer.</p>" +
+        '<p><a class="gbtn" href="' + gdir(pick(all.slice(0, half))) + '" target="_blank" rel="noopener">' + PIN + 'Boucle, 1re partie</a> <a class="gbtn" href="' + gdir(pick(all.slice(half - 1))) + '" target="_blank" rel="noopener">' + PIN + "Boucle, 2e partie</a></p></div>";
+    }
+    el.innerHTML = h;
+  }
+
+  function bbox(ids){
+    var xs = [], ys = [];
+    ids.forEach(function(id){ var p = pt(id); xs.push(p[0]); ys.push(p[1]); });
+    return [Math.min.apply(null, xs), Math.max.apply(null, xs), Math.min.apply(null, ys), Math.max.apply(null, ys)];
+  }
+  function fitBox(b, pw, ph, minW){
+    var r = frame(), A = (r.width || 720) / (r.height || 440);
+    var w = Math.max((b[1] - b[0]) * pw, minW), hh = Math.max((b[3] - b[2]) * ph, minW / A);
+    if (w / hh > A) hh = w / A; else w = hh * A;
+    return { x:(b[0] + b[1]) / 2 - w / 2, y:(b[2] + b[3]) / 2 - hh / 2, w:w, h:hh };
+  }
+  function fit(n){
+    var ids = route(n).filter(function(id){ return S[id].day === n; });
+    if (!ids.length) ids = route(n);
+    if (!ids.length) return fitAll();
+    return fitBox(bbox(ids), 1.6, 1.5, 24);
+  }
+  function fitAll(){
+    var ids = Object.keys(S).filter(function(id){ return S[id].la !== null; });
+    if (!ids.length) return { x:0, y:0, w:720, h:440 };
+    var r = frame(), A = (r.width || 720) / (r.height || 440);
+    return fitBox(bbox(ids), A < 1.2 ? 1.3 : 1.12, 1.14, 40);
+  }
+  function go(t){
+    if (anim) cancelAnimationFrame(anim);
+    var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) { view = t; draw(); return; }
+    var f = { x:view.x, y:view.y, w:view.w, h:view.h }, t0 = performance.now();
+    (function step(now){
+      var u = Math.min(1, (now - t0) / 500), e = u < .5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2;
+      view = { x:f.x + (t.x - f.x) * e, y:f.y + (t.y - f.y) * e, w:f.w + (t.w - f.w) * e, h:f.h + (t.h - f.h) * e };
+      setVB();
+      if (u < 1) anim = requestAnimationFrame(step); else { anim = null; draw(); }
+    })(t0);
+  }
+  function zoomAt(cx, cy, factor){
+    var nw = Math.min(1600, Math.max(4, view.w * factor)), f2 = nw / view.w;
+    view = { x:cx - (cx - view.x) * f2, y:cy - (cy - view.y) * f2, w:nw, h:view.h * f2 };
+    setVB(); later();
+  }
+  function toSvg(e){ var svg = document.getElementById("map"), p = svg.createSVGPoint(); p.x = e.clientX; p.y = e.clientY; return p.matrixTransform(svg.getScreenCTM().inverse()); }
+  function selectDay(n){ sel = n; selStop = null; go(n ? fit(n) : fitAll()); }
+  function selectStop(id){ selStop = id; draw(); }
+  function focusStop(id){
+    var st = S[id]; if (!st) return;
+    sel = st.day; selStop = id;
+    if (st.la === null) { go(fit(sel)); return; }
+    var p = pt(id), t = fit(sel), w = Math.min(t.w, 30), r = frame(), A = (r.width || 720) / (r.height || 440);
+    go({ x:p[0] - w / 2, y:p[1] - w / A / 2, w:w, h:w / A });
+  }
+
+  function bind(){
+    var svg = document.getElementById("map"); if (!svg) return;
+    var ptrs = {}, start = null, moved = false, pinch = null;
+    svg.addEventListener("pointerdown", function(e){
+      if (anim) { cancelAnimationFrame(anim); anim = null; }
+      ptrs[e.pointerId] = { x:e.clientX, y:e.clientY }; svg.setPointerCapture(e.pointerId); moved = false;
+      var ids = Object.keys(ptrs);
+      if (ids.length === 1) start = { x:e.clientX, y:e.clientY, v:{ x:view.x, y:view.y, w:view.w, h:view.h } };
+      if (ids.length === 2) { var a = ptrs[ids[0]], b = ptrs[ids[1]]; pinch = { d:Math.hypot(a.x - b.x, a.y - b.y), w:view.w }; }
+    });
+    svg.addEventListener("pointermove", function(e){
+      if (!ptrs[e.pointerId]) return;
+      ptrs[e.pointerId] = { x:e.clientX, y:e.clientY };
+      var ids = Object.keys(ptrs);
+      if (ids.length === 2 && pinch) {
+        var a = ptrs[ids[0]], b = ptrs[ids[1]], dd = Math.hypot(a.x - b.x, a.y - b.y);
+        var c = toSvg({ clientX:(a.x + b.x) / 2, clientY:(a.y + b.y) / 2 });
+        zoomAt(c.x, c.y, (pinch.w * pinch.d / dd) / view.w); moved = true; return;
+      }
+      if (start) {
+        var dx = e.clientX - start.x, dy = e.clientY - start.y;
+        if (Math.abs(dx) + Math.abs(dy) > 4) moved = true;
+        if (moved) { var kk = k(); view = { x:start.v.x - dx / kk, y:start.v.y - dy / kk, w:start.v.w, h:start.v.h }; setVB(); }
+      }
+    });
+    function up(e){
+      delete ptrs[e.pointerId];
+      if (Object.keys(ptrs).length < 2) pinch = null;
+      if (!Object.keys(ptrs).length) {
+        if (!moved) { var g = document.elementFromPoint(e.clientX, e.clientY); g = g && g.closest && g.closest("[data-stop]"); if (g) selectStop(g.dataset.stop); }
+        else later();
+        start = null;
+      }
+    }
+    svg.addEventListener("pointerup", up); svg.addEventListener("pointercancel", up);
+    svg.addEventListener("wheel", function(e){ e.preventDefault(); var c = toSvg(e); zoomAt(c.x, c.y, e.deltaY > 0 ? 1.18 : 1 / 1.18); }, { passive:false });
+    svg.addEventListener("keydown", function(e){ var g = e.target.closest && e.target.closest("[data-stop]"); if (g && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); selectStop(g.dataset.stop); } });
+  }
+
+  document.addEventListener("click", function(e){
+    if (!e.target.closest) return;
+    var c = e.target.closest(".mchip"); if (c) { selectDay(+c.dataset.day); return; }
+    var z = e.target.closest("[data-z]");
+    if (z) { var cx = view.x + view.w / 2, cy = view.y + view.h / 2; if (z.dataset.z === "in") zoomAt(cx, cy, 1 / 1.5); else if (z.dataset.z === "out") zoomAt(cx, cy, 1.5); else { sel = 0; selStop = null; go(fitAll()); } return; }
+    var m = e.target.closest(".mlink");
+    if (m) { focusStop(m.dataset.stop); return; }
+    var sh = e.target.closest("[data-show]");
+    if (sh) {
+      var sec = document.querySelector(".mapsec");
+      if (sec) sec.scrollIntoView({ behavior:(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) ? "auto" : "smooth", block:"start" });
+      focusStop(sh.dataset.show);
+    }
+  });
+  window.addEventListener("resize", function(){ if (document.getElementById("map")) { view = sel ? fit(sel) : fitAll(); draw(); } });
+
+  function markup(){
+    build();
+    return '<section class="wrap mapsec" aria-label="Carte de l’itinéraire"><div class="chips" role="group" aria-label="Choisir un jour"><button type="button" class="mchip all" data-day="0"><b>Boucle</b><small>' + data.days.filter(function(d){ return hasDay(d.n); }).length + ' jours</small></button>' +
+      data.days.filter(function(d){ return hasDay(d.n); }).map(function(d){ return '<button type="button" class="mchip" data-day="' + d.n + '" style="--c:' + d.c + '" title="' + esc(plain(d.date)) + '"><b>' + d.n + "</b><small>" + d.nd + "</small></button>"; }).join("") +
+      '</div><div class="mapframe"><svg id="map" viewBox="0 0 720 440" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Carte interactive de la boucle, générée à partir des lieux de chaque étape"></svg>' +
+      '<div class="zoom" role="group" aria-label="Zoom"><button type="button" data-z="in" aria-label="Zoomer" title="Zoomer"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3 8h10"/></svg></button><button type="button" data-z="out" aria-label="Dézoomer" title="Dézoomer"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10"/></svg></button><button type="button" data-z="reset" aria-label="Tout voir" title="Tout voir"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4"/></svg></button></div></div>' +
+      '<div class="mapbelow"><div id="mapinfo" class="mapinfo" aria-live="polite"></div><ul class="legend"><li><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5" class="lg-rando"/></svg>Rando</li><li><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5" class="lg-vue"/></svg>Belvédère ou étape</li><li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2L14 13H2Z" class="lg-camp"/></svg>Bivouac gratuit</li><li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2L14 13H2Z" class="lg-paid"/></svg>Camping payant</li><li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h14" class="lg-road"/></svg>Route principale</li><li><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="3" width="12" height="10" rx="2" class="lg-park"/></svg>Parc national</li><li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3l5 9H3z" class="lg-peak"/></svg>Sommet</li></ul>' +
+      '</div></section>';
+  }
+  function mount(){ view = sel ? fit(sel) : fitAll(); bind(); draw(); }
+  function idFor(n, j){ return "d" + n + "s" + j; }
+  function refresh(){ build(); draw(); }
+  return { markup:markup, mount:mount, idFor:idFor, refresh:refresh, has:function(id){ return !!(S[id] && S[id].la !== null); } };
+})();
+
+
+function weatherLi(d){
+  var pl = d.sleepAt && parseLL(d.sleepAt.ll) ? d.sleepAt : null;
+  if (!pl) for (var j = d.sched.length - 1; j >= 0 && !pl; j--) { var c = d.sched[j][2]; if (c && parseLL(c.ll)) pl = c; }
+  if (!pl) return "";
+  var ll = parseLL(pl.ll), name = esc(plain(pl.n) || "");
+  return '<li class="wx"><a class="wxbtn" href="https://forecast.weather.gov/MapClick.php?lat=' + ll[0].toFixed(4) + "&lon=" + ll[1].toFixed(4) + '" target="_blank" rel="noopener" title="Prévisions à 7 jours pour ' + name + ' (National Weather Service)"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 12.5h7a2.8 2.8 0 0 0 .3-5.6A4 4 0 0 0 4.1 7.3 2.6 2.6 0 0 0 4.5 12.5z"/></svg>Météo</a><a class="wxbtn" href="https://www.att.com/maps/wireless-coverage.html" target="_blank" rel="noopener" title="Carte de couverture AT&amp;T (à zoomer sur la zone)"><svg viewBox="0 0 16 16" aria-hidden="true"><path class="sig" d="M2.5 13v-2M6.2 13V9M9.8 13V6.5M13.5 13V4"/></svg>Couverture réseau</a></li>';
+}
+function placeView(p, id){
+  if (!p) return "";
+  var name = esc(plain(p.n) || "Lieu");
+  return '<span class="place">' + (MAP.has(id) ? '<button type="button" class="plshow" data-show="' + id + '" title="Voir sur la carte">' + PIN + name + "</button>" : '<span class="plname">' + PIN + name + "</span>") +
+    '<a class="plg" href="' + gq(placeQuery(p)) + '" target="_blank" rel="noopener">Google Maps</a></span>';
+}
+function placeEdit(p, path){
+  if (!p) return '<button type="button" class="add addpl" data-addplace="' + path + '">+ Lieu</button>';
+  var ll = plain(p.ll).trim(), bad = ll && !parseLL(p.ll);
+  return '<div class="pled"><span class="pll">Lieu</span>' + E(path + ".n", p.n) +
+    '<span class="pll">Adresse</span>' + E(path + ".a", p.a) +
+    '<span class="pll">Coordonnées</span><span class="pllv">' + E(path + ".ll", p.ll) + ' <a class="plg" href="' + gq(placeQuery(p)) + '" target="_blank" rel="noopener">trouver sur Google Maps</a>' +
+    (bad ? '<em class="plbad">Illisibles. Format attendu : 36.4848, -114.5279</em>' : (!ll ? '<em class="plbad">Absentes : le lieu n’apparaît pas sur la carte.</em>' : "")) + "</span>" +
+    '<span class="pll">Étiquette</span><span class="pllv">' + E(path + ".lab", p.lab) + '<em class="plhint">Facultatif : nom affiché sur la vue d’ensemble.</em></span>' +
+    '<span class="pll">Type</span><span><button type="button" class="kindbtn" data-kind="' + path + '" title="Changer le type">' + KIND[p.k] + '</button> <button type="button" class="rmpl" data-rmplace="' + path + '">Retirer le lieu</button></span></div>';
+}
+
+function watchNav(){
+  if (io) io.disconnect();
+  var links = [].slice.call(document.querySelectorAll(".strata a"));
+  io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) {
+    var n = e.target.id.replace("day", "");
+    links.forEach(function(a){ a.setAttribute("aria-current", a.dataset.n === n ? "true" : "false"); });
+  } }); }, { rootMargin: "-40% 0px -55% 0px" });
+  [].forEach.call(document.querySelectorAll(".day"), function(d){ io.observe(d); });
+}
+
+/* editing */
+function clean(el){
+  var out = [];
+  (function walk(n){
+    [].forEach.call(n.childNodes, function(c){
+      if (c.nodeType === 3) { out.push(esc(c.nodeValue)); return; }
+      if (c.nodeType !== 1) return;
+      var t = c.tagName;
+      if (t === "BR") { out.push("<br>"); return; }
+      var k = { B:"b", STRONG:"b", I:"i", EM:"i" }[t];
+      if (k) { out.push("<" + k + ">"); walk(c); out.push("</" + k + ">"); }
+      else { if (t === "DIV" || t === "P") out.push(" "); walk(c); }
+    });
+  })(el);
+  return out.join("").replace(/(<br>\s*)+$/, "").replace(/\u00a0/g, " ").replace(/<(b|i)><\/\1>/g, "").trim();
+}
+function walkPath(path){
+  var parts = path.split("."), o = data;
+  for (var i = 0; i < parts.length - 1; i++) o = o[/^\d+$/.test(parts[i]) ? +parts[i] : parts[i]];
+  var last = parts[parts.length - 1];
+  return { obj: o, key: /^\d+$/.test(last) ? +last : last };
+}
+function collect(){
+  [].forEach.call(root.querySelectorAll("[data-path]"), function(el){ var w = walkPath(el.dataset.path); w.obj[w.key] = clean(el); });
+}
+var BLANK = { music:["","",""], sched:["","",null], hikes:["","",""], sky:["",""], todo:["",""], nerd:"", notes:"", avis:"", contract:"", footer:"" };
+
+root.addEventListener("click", function(e){
+  var ap = e.target.closest("[data-addplace]"), rp = e.target.closest("[data-rmplace]"), kb = e.target.closest("[data-kind]");
+  if (ap || rp || kb) {
+    collect();
+    var wp = walkPath((ap || rp || kb).dataset[ap ? "addplace" : (rp ? "rmplace" : "kind")]);
+    if (ap) wp.obj[wp.key] = { n:"", a:"", ll:"", k:/sleepAt$/.test(ap.dataset.addplace) ? "camp" : "vue", lab:"" };
+    else if (rp) wp.obj[wp.key] = null;
+    else { var pl = wp.obj[wp.key]; pl.k = KORDER[(KORDER.indexOf(pl.k) + 1) % KORDER.length]; }
+    render();
+    if (ap) { var f0 = root.querySelector('[data-path="' + ap.dataset.addplace + '.n"]'); if (f0) f0.focus(); }
+    return;
+  }
+  var a = e.target.closest("[data-add]"), d = e.target.closest("[data-del]");
+  if (!a && !d) return;
+  collect();
+  if (a) {
+    var w = walkPath(a.dataset.add + ".x"), list = w.obj, key = a.dataset.add.split(".").pop();
+    list.push(JSON.parse(JSON.stringify(BLANK[key])));
+    render();
+    var f = root.querySelector('[data-path^="' + a.dataset.add + "." + (list.length - 1) + '"]');
+    if (f) f.focus();
+  } else {
+    var wd = walkPath(d.dataset.del);
+    wd.obj.splice(wd.key, 1);
+    render();
+  }
+});
+root.addEventListener("change", function(e){
+  if (e.target.dataset && e.target.dataset.i !== undefined) { done[e.target.dataset.i] = e.target.checked; store.set("sw-loop-todo", done); }
+});
+root.addEventListener("focusout", function(e){
+  if (!editing || !e.target.dataset || !/\.(sched\.\d+\.2|sleepAt)\.(n|a|ll|lab)$/.test(e.target.dataset.path || "")) return;
+  collect(); MAP.refresh();
+});
+var MULTI = /(\.sched\.\d+\.1|^notes\.\d+|^avis\.\d+|^contract\.\d+|^footer\.\d+|\.nerd\.\d+|\.alt|\.sleep|^lede|^todo\.\d+\.1|\.music\.\d+\.2|^prepSub|^daysSub|\.drive)$/;
+function isMulti(el){ var f = el && el.closest && el.closest("[data-path]"); return !!(f && MULTI.test(f.dataset.path)); }
+function insertBR(){
+  var sel = window.getSelection(); if (!sel || !sel.rangeCount) return;
+  var r = sel.getRangeAt(0); r.deleteContents();
+  var br = document.createElement("br"); r.insertNode(br);
+  var nx = br.nextSibling;
+  while (nx && nx.nodeType === 3 && nx.nodeValue === "") nx = nx.nextSibling;
+  if (!nx) br.parentNode.insertBefore(document.createElement("br"), br.nextSibling);
+  r = document.createRange(); r.setStartAfter(br); r.collapse(true);
+  sel.removeAllRanges(); sel.addRange(r);
+}
+root.addEventListener("keydown", function(e){
+  if (!editing || e.key !== "Enter" || !e.target.isContentEditable) return;
+  e.preventDefault();
+  if (isMulti(e.target)) insertBR();
+});
+root.addEventListener("paste", function(e){
+  if (!editing || !e.target.closest("[contenteditable]")) return;
+  e.preventDefault();
+  var raw = (e.clipboardData || window.clipboardData).getData("text/plain");
+  if (!isMulti(e.target)) { document.execCommand("insertText", false, raw.replace(/\s*\n\s*/g, " ")); return; }
+  raw.replace(/\r/g, "").split("\n").forEach(function(line, i){ if (i) insertBR(); if (line) document.execCommand("insertText", false, line); });
+});
+
+function buildDoc(){
+  var json = JSON.stringify(data).replace(/</g, "\\u003c");
+  return "<!doctype html>\n<html lang=\"fr\">\n<head>\n" + HEAD + "\n<title>" + esc(plain(data.title) + " : " + plain(data.subtitle)) + "</title>\n<style id=\"css\">" + CSS_SRC + "</style>\n</head>\n<body>\n<div id=\"root\"></div>\n<div id=\"editbar\" class=\"editbar\" hidden></div>\n<script id=\"trip-data\" type=\"application/json\">" + json + "<\/script>\n<script id=\"app\">" + APP_SRC + "<\/script>\n</body>\n</html>\n";
+}
+
+var msg = "";
+var EXP_ICON = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8M4.5 6.5 8 10l3.5-3.5M3 13h10"/></svg>';
+function canExport(){ return !!((art && art.local) || dlApi); }
+function renderBar(){
+  if (!art || readOnly) {
+    var ex = canExport() ? '<button type="button" data-act="export">' + EXP_ICON + "Exporter</button>" : "";
+    bar.hidden = !msg && !ex;
+    bar.innerHTML = (msg ? '<span class="msg">' + msg + "</span>" : "") + ex;
+    return;
+  }
+  bar.hidden = false;
+  var draft = null;
+  try { draft = sessionStorage.getItem("trip-draft"); } catch(e){}
+  if (!editing && draft) {
+    bar.innerHTML = '<span class="msg">Des modifications non enregistrées ont été retrouvées.</span><button type="button" class="primary" data-act="restore">Restaurer</button><button type="button" data-act="drop">Ignorer</button>';
+  } else if (!editing) {
+    bar.innerHTML = (msg ? '<span class="msg">' + msg + "</span>" : "") + '<button type="button" class="primary" data-act="edit">✎ Modifier la page</button>' + (canExport() ? '<button type="button" data-act="export" title="Télécharger la page avec vos modifications enregistrées">' + EXP_ICON + "Exporter</button>" : "");
+  } else {
+    bar.innerHTML = '<span class="msg">' + (msg || "Cliquez sur un texte pour le modifier. Entrée pour aller à la ligne, Ctrl+B pour le gras.") + '</span><button type="button" class="primary" data-act="save"' + (saving ? " disabled" : "") + ">" + (saving ? "Enregistrement…" : "Enregistrer") + '</button><button type="button" data-act="cancel"' + (saving ? " disabled" : "") + ">Annuler</button>";
+  }
+}
+bar.addEventListener("click", function(e){
+  var b = e.target.closest("[data-act]"); if (!b) return;
+  var act = b.dataset.act; msg = "";
+  if (act === "edit") { editing = true; render(); }
+  else if (act === "cancel") { data = JSON.parse(DATA_SRC); editing = false; render(); }
+  else if (act === "restore") { try { data = JSON.parse(sessionStorage.getItem("trip-draft")); sessionStorage.removeItem("trip-draft"); } catch(err){} editing = true; render(); }
+  else if (act === "drop") { try { sessionStorage.removeItem("trip-draft"); } catch(err){} renderBar(); }
+  else if (act === "save") { save(false); }
+  else if (act === "export") { exportFile(); }
+});
+
+function exportFile(){
+  var html = buildDoc();
+  if (art && art.local) {
+    try {
+      var url = URL.createObjectURL(new Blob([html], { type:"text/html" }));
+      var lnk = document.createElement("a"); lnk.href = url; lnk.download = exportName();
+      document.body.appendChild(lnk); lnk.click(); lnk.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+      msg = "Fichier exporté dans vos téléchargements.";
+    } catch (err) { msg = "L’export a échoué."; }
+    renderBar(); return;
+  }
+  if (!dlApi) return;
+  dlApi.save({ filename:exportName(), data:new Blob([html]) }).then(function(r){
+    msg = r && r.status === "saved" ? "Fichier exporté." : ""; renderBar();
+  }, function(err){
+    var c = err && err.code;
+    if (c === "declined") msg = "";
+    else if (c === "rate_limited") msg = "Un export est déjà en cours. Réessayez dans un instant.";
+    else if (c === "too_large") msg = "La page est trop lourde pour être exportée ici.";
+    else if (c === "rejected_extension" || c === "extension_not_enabled") { msg = "L’export en HTML n’est pas disponible ici."; dlApi = null; }
+    else { msg = "L’export n’est pas disponible dans cette vue."; dlApi = null; }
+    renderBar();
+  });
+}
+
+function save(retried){
+  collect();
+  saving = true; renderBar();
+  try { sessionStorage.removeItem("trip-draft"); } catch(e){}
+  if (art.local) {
+    var js = JSON.stringify(data);
+    try { localStorage.setItem("trip-local-data", JSON.stringify({ base:BASE_HASH, data:js })); msg = "Enregistré dans ce navigateur. Cliquez sur Exporter pour en faire un fichier."; }
+    catch (err) { msg = "Impossible d’enregistrer dans ce navigateur. Utilisez Exporter pour garder vos modifications."; }
+    DATA_SRC = js; editing = false; saving = false; render();
+    return;
+  }
+  art.publish(buildDoc()).then(function(){
+    msg = "Enregistré. La page se recharge…"; saving = false; renderBar();
+  }, function(err){
+    saving = false;
+    var code = err && err.code;
+    if (code === "conflict") {
+      try { sessionStorage.setItem("trip-draft", JSON.stringify(data)); } catch(e){}
+      msg = "La page a été modifiée ailleurs entre-temps et se recharge. Vos modifications sont gardées pour être restaurées.";
+    } else if (["not_writer","not_granted","consent_required","not_declared","capability_disabled","capability_removed"].indexOf(code) >= 0) {
+      readOnly = true; editing = false; data = JSON.parse(DATA_SRC);
+      msg = "Cette page est en lecture seule pour vous."; render(); return;
+    } else if (code === "rate_limited") {
+      msg = "Trop d’enregistrements rapprochés. Attendez un instant puis réessayez.";
+    } else if (code === "too_large") {
+      msg = "La page est devenue trop lourde pour être enregistrée.";
+    } else if (!retried && (code === "upstream_error" || !code)) {
+      setTimeout(function(){ save(true); }, 800 + Math.random() * 1200); return;
+    } else {
+      msg = "L’enregistrement a échoué. Vos modifications sont toujours là ; réessayez.";
+    }
+    renderBar();
+  });
+}
+
+/* theme toggle: auto (system) -> jour -> nuit */
+var THEMES = ["auto", "light", "dark"];
+var THEME_UI = {
+  auto:{ t:"Auto", i:'<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.2"/><path class="half" d="M8 2.8a5.2 5.2 0 0 1 0 10.4z"/></svg>' },
+  light:{ t:"Jour", i:'<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1.5v1.8M8 12.7v1.8M1.5 8h1.8M12.7 8h1.8M3.4 3.4l1.3 1.3M11.3 11.3l1.3 1.3M3.4 12.6l1.3-1.3M11.3 4.7l1.3-1.3"/></svg>' },
+  dark:{ t:"Nuit", i:'<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 10.2A5.6 5.6 0 0 1 5.8 3a5.6 5.6 0 1 0 7.2 7.2z"/></svg>' }
+};
+var theme = "auto";
+try { var t1 = localStorage.getItem("trip-theme"); if (THEMES.indexOf(t1) >= 0) theme = t1; } catch(e){}
+var tbtn = document.createElement("button");
+tbtn.type = "button"; tbtn.className = "themebtn";
+function applyTheme(){
+  if (theme === "auto") document.documentElement.removeAttribute("data-theme"); else document.documentElement.setAttribute("data-theme", theme);
+  tbtn.innerHTML = THEME_UI[theme].i + "<span>" + THEME_UI[theme].t + "</span>";
+  tbtn.title = "Thème : " + THEME_UI[theme].t.toLowerCase() + " (cliquer pour changer)";
+  tbtn.setAttribute("aria-label", "Thème : " + THEME_UI[theme].t + ". Changer de thème");
+}
+tbtn.addEventListener("click", function(){
+  theme = THEMES[(THEMES.indexOf(theme) + 1) % THEMES.length];
+  try { localStorage.setItem("trip-theme", theme); } catch(e){}
+  applyTheme();
+});
+applyTheme();
+document.body.appendChild(tbtn);
+
+/* back-to-map button, shown once the map is scrolled out of view */
+var mbtn = document.createElement("button");
+mbtn.type = "button"; mbtn.className = "themebtn mapbtn"; mbtn.hidden = true;
+mbtn.title = "Remonter à la carte"; mbtn.setAttribute("aria-label", "Remonter à la carte");
+mbtn.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 13V3.5M3.8 7.6 8 3.4l4.2 4.2"/></svg><span>Carte</span>';
+mbtn.addEventListener("click", function(){
+  var sec = document.querySelector(".mapsec"); if (!sec) return;
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  sec.scrollIntoView({ behavior:reduce ? "auto" : "smooth", block:"start" });
+});
+document.body.appendChild(mbtn);
+var mtick = 0;
+function checkMapBtn(){ mtick = 0; var sec = document.querySelector(".mapsec"); mbtn.hidden = !sec || sec.getBoundingClientRect().bottom > 0; }
+window.addEventListener("scroll", function(){ if (!mtick) mtick = requestAnimationFrame(checkMapBtn); }, { passive:true });
+window.addEventListener("resize", checkMapBtn);
+
+render();
+if (location.hash) { var t0 = document.getElementById(location.hash.slice(1)); if (t0) setTimeout(function(){ t0.scrollIntoView(); }, 50); }
+
+if (window.claude && window.claude.use) {
+  window.claude.use("artifact").then(function(a){
+    if (!a) return;
+    art = a;
+    return window.claude.use("user").then(function(u){
+      if (!u || !u.can) return null;
+      return u.can("files.write");
+    }).then(function(ok){ if (ok === false) readOnly = true; }, function(){});
+  }).then(function(){ renderBar(); }, function(){});
+  window.claude.use("downloads").then(function(x){ dlApi = x || null; renderBar(); }, function(){});
+} else {
+  art = { local:true };
+  try {
+    var saved = JSON.parse(localStorage.getItem("trip-local-data") || "null");
+    if (saved && saved.base === BASE_HASH && saved.data) { data = JSON.parse(saved.data); DATA_SRC = saved.data; render(); msg = "Vos modifications enregistrées dans ce navigateur ont été rechargées."; }
+  } catch (err) {}
+  renderBar();
+}
+})();
+</script>
+</body>
+</html>
